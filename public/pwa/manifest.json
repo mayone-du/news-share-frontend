@@ -1,0 +1,18 @@
+{
+    "name":             "template",
+    "short_name":       "template",
+    "description":      "template app",
+    "start_url":        "/",
+    "display":          "standalone",
+    "orientation":      "portrate-primary",
+    "background_color": "#fff",
+    "theme_color":      "#fff",
+    "dir": "ltr",
+    "icons": [
+        {
+            "src": "/pwa/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+query GetLoginUser {
+  loginUser {
+    id
+    email
+    sender {
+      edges {
+        node {
+          destination {
+            email
+          }
+          text
+          createdAt
+        }
+      }
+    }
+    targetUser {
+      id
+      profileName
+      profileText
+      profileImage
+      telephoneNumber
+      createdAt
+      followingUsers {
+        edges {
+          node {
+            id
+            email
+          }
+        }
+      }
+      selectedGender {
+        genderName
+      }
+      selectedAddress {
+        addressName
+      }
+      tags {
+        edges {
+          node {
+            tagName
+          }
+        }
+      }
+    }
+  }
+}

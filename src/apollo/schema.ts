@@ -24,96 +24,86 @@ export type Scalars = {
    * String, Boolean, Int, Float, List or Object.
    */
   GenericScalar: any;
-  /**
-   * Create scalar that ignores normal serialization/deserialization, since
-   * that will be handled by the multipart request spec
-   */
-  Upload: any;
 };
 
-export type AddressNode = Node & {
-  __typename?: 'AddressNode';
+export type CategoryNode = Node & {
+  __typename?: 'CategoryNode';
   /** The ID of the object. */
   id: Scalars['ID'];
-  addressName: Scalars['String'];
-  selectedAddress: ProfileNodeConnection;
+  categoryName: Scalars['String'];
+  selectCategory: NewsNodeConnection;
 };
 
 
-export type AddressNodeSelectedAddressArgs = {
+export type CategoryNodeSelectCategoryArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  profileName?: Maybe<Scalars['String']>;
-  profileName_Icontains?: Maybe<Scalars['String']>;
-  isCollegeStudent?: Maybe<Scalars['Boolean']>;
-  schoolName?: Maybe<Scalars['String']>;
-  schoolName_Icontains?: Maybe<Scalars['String']>;
-  selectedAddress?: Maybe<Scalars['ID']>;
-  selectedGender?: Maybe<Scalars['ID']>;
+  url?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  title_Icontains?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  summary_Icontains?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  createdAt_Icontains?: Maybe<Scalars['DateTime']>;
 };
 
-export type AddressNodeConnection = {
-  __typename?: 'AddressNodeConnection';
+export type CategoryNodeConnection = {
+  __typename?: 'CategoryNodeConnection';
   /** Pagination data for this connection. */
   pageInfo: PageInfo;
   /** Contains the nodes in this connection. */
-  edges: Array<Maybe<AddressNodeEdge>>;
+  edges: Array<Maybe<CategoryNodeEdge>>;
 };
 
-/** A Relay edge containing a `AddressNode` and its cursor. */
-export type AddressNodeEdge = {
-  __typename?: 'AddressNodeEdge';
+/** A Relay edge containing a `CategoryNode` and its cursor. */
+export type CategoryNodeEdge = {
+  __typename?: 'CategoryNodeEdge';
   /** The item at the end of the edge */
-  node?: Maybe<AddressNode>;
+  node?: Maybe<CategoryNode>;
   /** A cursor for use in pagination */
   cursor: Scalars['String'];
 };
 
-export type CreateMessageMutationInput = {
-  distination: Scalars['ID'];
-  text: Scalars['String'];
+export type CreateCategoryMutationInput = {
+  categoryName: Scalars['String'];
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type CreateMessageMutationPayload = {
-  __typename?: 'CreateMessageMutationPayload';
-  message?: Maybe<MessageNode>;
+export type CreateCategoryMutationPayload = {
+  __typename?: 'CreateCategoryMutationPayload';
+  category?: Maybe<CategoryNode>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type CreatePostMutationInput = {
-  title: Scalars['String'];
-  content: Scalars['String'];
-  postImage?: Maybe<Scalars['Upload']>;
-  isPublished: Scalars['Boolean'];
+export type CreateNewsMutationInput = {
+  selectCategoryId?: Maybe<Scalars['ID']>;
+  url: Scalars['String'];
+  tagIds?: Maybe<Array<Maybe<Scalars['ID']>>>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type CreatePostMutationPayload = {
-  __typename?: 'CreatePostMutationPayload';
-  post?: Maybe<PostNode>;
+export type CreateNewsMutationPayload = {
+  __typename?: 'CreateNewsMutationPayload';
+  news?: Maybe<NewsNode>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type CreateProfileMutationInput = {
-  profileName: Scalars['String'];
-  isCollegeStudent: Scalars['Boolean'];
-  schoolName: Scalars['String'];
-  selectedGender: Scalars['ID'];
-  selectedAddress: Scalars['ID'];
+export type CreateTagMutationInput = {
+  tagName: Scalars['String'];
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type CreateProfileMutationPayload = {
-  __typename?: 'CreateProfileMutationPayload';
-  profile?: Maybe<ProfileNode>;
+export type CreateTagMutationPayload = {
+  __typename?: 'CreateTagMutationPayload';
+  tag?: Maybe<TagNode>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CreateUserMutationInput = {
+  username?: Maybe<Scalars['String']>;
   email: Scalars['String'];
   password: Scalars['String'];
   clientMutationId?: Maybe<Scalars['String']>;
@@ -126,98 +116,17 @@ export type CreateUserMutationPayload = {
 };
 
 
-export type DeletePostMutationInput = {
-  id: Scalars['ID'];
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type DeletePostMutationPayload = {
-  __typename?: 'DeletePostMutationPayload';
-  post?: Maybe<PostNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type GenderNode = Node & {
-  __typename?: 'GenderNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  genderName: Scalars['String'];
-  selectedGender: ProfileNodeConnection;
-};
-
-
-export type GenderNodeSelectedGenderArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  profileName?: Maybe<Scalars['String']>;
-  profileName_Icontains?: Maybe<Scalars['String']>;
-  isCollegeStudent?: Maybe<Scalars['Boolean']>;
-  schoolName?: Maybe<Scalars['String']>;
-  schoolName_Icontains?: Maybe<Scalars['String']>;
-  selectedAddress?: Maybe<Scalars['ID']>;
-  selectedGender?: Maybe<Scalars['ID']>;
-};
-
-export type GenderNodeConnection = {
-  __typename?: 'GenderNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<GenderNodeEdge>>;
-};
-
-/** A Relay edge containing a `GenderNode` and its cursor. */
-export type GenderNodeEdge = {
-  __typename?: 'GenderNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<GenderNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
-
-export type MessageNode = Node & {
-  __typename?: 'MessageNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  sender: UserNode;
-  destination: UserNode;
-  text: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-};
-
-export type MessageNodeConnection = {
-  __typename?: 'MessageNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<MessageNodeEdge>>;
-};
-
-/** A Relay edge containing a `MessageNode` and its cursor. */
-export type MessageNodeEdge = {
-  __typename?: 'MessageNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<MessageNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
 
 export type Mutation = {
   __typename?: 'Mutation';
   createUser?: Maybe<CreateUserMutationPayload>;
-  createProfile?: Maybe<CreateProfileMutationPayload>;
-  updateProfile?: Maybe<UpdateProfileMutationPayload>;
-  createPost?: Maybe<CreatePostMutationPayload>;
-  updatePost?: Maybe<UpdatePostMutationPayload>;
-  deletePost?: Maybe<DeletePostMutationPayload>;
-  createMessage?: Maybe<CreateMessageMutationPayload>;
+  createCategory?: Maybe<CreateCategoryMutationPayload>;
+  createTag?: Maybe<CreateTagMutationPayload>;
+  createNews?: Maybe<CreateNewsMutationPayload>;
   /** Obtain JSON Web Token mutation */
   tokenAuth?: Maybe<ObtainJsonWebToken>;
   refreshToken?: Maybe<Refresh>;
+  revokeToken?: Maybe<Revoke>;
 };
 
 
@@ -226,33 +135,18 @@ export type MutationCreateUserArgs = {
 };
 
 
-export type MutationCreateProfileArgs = {
-  input: CreateProfileMutationInput;
+export type MutationCreateCategoryArgs = {
+  input: CreateCategoryMutationInput;
 };
 
 
-export type MutationUpdateProfileArgs = {
-  input: UpdateProfileMutationInput;
+export type MutationCreateTagArgs = {
+  input: CreateTagMutationInput;
 };
 
 
-export type MutationCreatePostArgs = {
-  input: CreatePostMutationInput;
-};
-
-
-export type MutationUpdatePostArgs = {
-  input: UpdatePostMutationInput;
-};
-
-
-export type MutationDeletePostArgs = {
-  input: DeletePostMutationInput;
-};
-
-
-export type MutationCreateMessageArgs = {
-  input: CreateMessageMutationInput;
+export type MutationCreateNewsArgs = {
+  input: CreateNewsMutationInput;
 };
 
 
@@ -264,6 +158,52 @@ export type MutationTokenAuthArgs = {
 
 export type MutationRefreshTokenArgs = {
   refreshToken?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationRevokeTokenArgs = {
+  refreshToken?: Maybe<Scalars['String']>;
+};
+
+export type NewsNode = Node & {
+  __typename?: 'NewsNode';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  selectCategory?: Maybe<CategoryNode>;
+  url: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  imagePath?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  tags: TagNodeConnection;
+};
+
+
+export type NewsNodeTagsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  tagName?: Maybe<Scalars['String']>;
+  tagName_Icontains?: Maybe<Scalars['String']>;
+};
+
+export type NewsNodeConnection = {
+  __typename?: 'NewsNodeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<NewsNodeEdge>>;
+};
+
+/** A Relay edge containing a `NewsNode` and its cursor. */
+export type NewsNodeEdge = {
+  __typename?: 'NewsNodeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<NewsNode>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
 };
 
 /** An object with an ID */
@@ -294,123 +234,16 @@ export type PageInfo = {
   endCursor?: Maybe<Scalars['String']>;
 };
 
-export type PostNode = Node & {
-  __typename?: 'PostNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  postedUser: UserNode;
-  title: Scalars['String'];
-  content: Scalars['String'];
-  postImage?: Maybe<Scalars['String']>;
-  isPublished: Scalars['Boolean'];
-  publishedAt: Scalars['DateTime'];
-  createdAt: Scalars['DateTime'];
-  targetPost: ReviewNodeConnection;
-};
-
-
-export type PostNodeTargetPostArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stars?: Maybe<Scalars['Int']>;
-  reviewText?: Maybe<Scalars['String']>;
-  reviewText_Icontains?: Maybe<Scalars['String']>;
-};
-
-export type PostNodeConnection = {
-  __typename?: 'PostNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<PostNodeEdge>>;
-};
-
-/** A Relay edge containing a `PostNode` and its cursor. */
-export type PostNodeEdge = {
-  __typename?: 'PostNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<PostNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
-export type ProfileNode = Node & {
-  __typename?: 'ProfileNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  targetUser: UserNode;
-  telephoneNumber: Scalars['String'];
-  profileName: Scalars['String'];
-  profileText: Scalars['String'];
-  isCollegeStudent: Scalars['Boolean'];
-  schoolName: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  profileImage?: Maybe<Scalars['String']>;
-  followingUsers: UserNodeConnection;
-  selectedAddress: AddressNode;
-  selectedGender: GenderNode;
-  tags: TagNodeConnection;
-};
-
-
-export type ProfileNodeFollowingUsersArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  email?: Maybe<Scalars['String']>;
-  email_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type ProfileNodeTagsArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  tagName?: Maybe<Scalars['String']>;
-  tagName_Icontains?: Maybe<Scalars['String']>;
-};
-
-export type ProfileNodeConnection = {
-  __typename?: 'ProfileNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<ProfileNodeEdge>>;
-};
-
-/** A Relay edge containing a `ProfileNode` and its cursor. */
-export type ProfileNodeEdge = {
-  __typename?: 'ProfileNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<ProfileNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<UserNode>;
   allUsers?: Maybe<UserNodeConnection>;
-  myProfile?: Maybe<ProfileNode>;
-  profile?: Maybe<ProfileNode>;
-  allProfiles?: Maybe<ProfileNodeConnection>;
-  post?: Maybe<PostNode>;
-  allPosts?: Maybe<PostNodeConnection>;
+  category?: Maybe<CategoryNode>;
+  allCategories?: Maybe<CategoryNodeConnection>;
   tag?: Maybe<TagNode>;
   allTags?: Maybe<TagNodeConnection>;
-  review?: Maybe<ReviewNode>;
-  allReviews?: Maybe<ReviewNodeConnection>;
-  gender?: Maybe<GenderNode>;
-  allGenders?: Maybe<GenderNodeConnection>;
-  address?: Maybe<AddressNode>;
-  allAddresses?: Maybe<AddressNodeConnection>;
+  news?: Maybe<NewsNode>;
+  allNews?: Maybe<NewsNodeConnection>;
 };
 
 
@@ -427,45 +260,23 @@ export type QueryAllUsersArgs = {
   last?: Maybe<Scalars['Int']>;
   email?: Maybe<Scalars['String']>;
   email_Icontains?: Maybe<Scalars['String']>;
+  isStaff?: Maybe<Scalars['Boolean']>;
 };
 
 
-export type QueryProfileArgs = {
+export type QueryCategoryArgs = {
   id: Scalars['ID'];
 };
 
 
-export type QueryAllProfilesArgs = {
+export type QueryAllCategoriesArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  profileName?: Maybe<Scalars['String']>;
-  profileName_Icontains?: Maybe<Scalars['String']>;
-  isCollegeStudent?: Maybe<Scalars['Boolean']>;
-  schoolName?: Maybe<Scalars['String']>;
-  schoolName_Icontains?: Maybe<Scalars['String']>;
-  selectedAddress?: Maybe<Scalars['ID']>;
-  selectedGender?: Maybe<Scalars['ID']>;
-};
-
-
-export type QueryPostArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryAllPostsArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  title_Icontains?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['String']>;
-  content_Icontains?: Maybe<Scalars['String']>;
+  categoryName?: Maybe<Scalars['String']>;
+  categoryName_Icontains?: Maybe<Scalars['String']>;
 };
 
 
@@ -485,52 +296,24 @@ export type QueryAllTagsArgs = {
 };
 
 
-export type QueryReviewArgs = {
+export type QueryNewsArgs = {
   id: Scalars['ID'];
 };
 
 
-export type QueryAllReviewsArgs = {
+export type QueryAllNewsArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  stars?: Maybe<Scalars['Int']>;
-  reviewText?: Maybe<Scalars['String']>;
-  reviewText_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type QueryGenderArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryAllGendersArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  genderName?: Maybe<Scalars['String']>;
-  genderName_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type QueryAddressArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryAllAddressesArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  addressName?: Maybe<Scalars['String']>;
-  addressName_Icontains?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  title_Icontains?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  summary_Icontains?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  createdAt_Icontains?: Maybe<Scalars['DateTime']>;
 };
 
 export type Refresh = {
@@ -541,31 +324,9 @@ export type Refresh = {
   refreshToken: Scalars['String'];
 };
 
-export type ReviewNode = Node & {
-  __typename?: 'ReviewNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  targetPost: PostNode;
-  reviewedUser: UserNode;
-  reviewText: Scalars['String'];
-  stars: Scalars['Int'];
-};
-
-export type ReviewNodeConnection = {
-  __typename?: 'ReviewNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<ReviewNodeEdge>>;
-};
-
-/** A Relay edge containing a `ReviewNode` and its cursor. */
-export type ReviewNodeEdge = {
-  __typename?: 'ReviewNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<ReviewNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
+export type Revoke = {
+  __typename?: 'Revoke';
+  revoked: Scalars['Int'];
 };
 
 export type TagNode = Node & {
@@ -573,7 +334,7 @@ export type TagNode = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   tagName: Scalars['String'];
-  tags: ProfileNodeConnection;
+  tags: NewsNodeConnection;
 };
 
 
@@ -583,13 +344,13 @@ export type TagNodeTagsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  profileName?: Maybe<Scalars['String']>;
-  profileName_Icontains?: Maybe<Scalars['String']>;
-  isCollegeStudent?: Maybe<Scalars['Boolean']>;
-  schoolName?: Maybe<Scalars['String']>;
-  schoolName_Icontains?: Maybe<Scalars['String']>;
-  selectedAddress?: Maybe<Scalars['ID']>;
-  selectedGender?: Maybe<Scalars['ID']>;
+  url?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  title_Icontains?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  summary_Icontains?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  createdAt_Icontains?: Maybe<Scalars['DateTime']>;
 };
 
 export type TagNodeConnection = {
@@ -609,40 +370,6 @@ export type TagNodeEdge = {
   cursor: Scalars['String'];
 };
 
-export type UpdatePostMutationInput = {
-  id: Scalars['ID'];
-  title?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['String']>;
-  postImage?: Maybe<Scalars['Upload']>;
-  isPublished?: Maybe<Scalars['Boolean']>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type UpdatePostMutationPayload = {
-  __typename?: 'UpdatePostMutationPayload';
-  post?: Maybe<PostNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type UpdateProfileMutationInput = {
-  id: Scalars['ID'];
-  profileName: Scalars['String'];
-  isCollegeStudent: Scalars['Boolean'];
-  schoolName: Scalars['String'];
-  selectedGender: Scalars['ID'];
-  selectedAddress: Scalars['ID'];
-  followingUsers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  tags?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type UpdateProfileMutationPayload = {
-  __typename?: 'UpdateProfileMutationPayload';
-  profile?: Maybe<ProfileNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-
 export type UserNode = Node & {
   __typename?: 'UserNode';
   /** The ID of the object. */
@@ -656,75 +383,6 @@ export type UserNode = Node & {
   isStaff: Scalars['Boolean'];
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
-  targetUser?: Maybe<ProfileNode>;
-  followingUsers: ProfileNodeConnection;
-  postedUser: PostNodeConnection;
-  reviewedUser: ReviewNodeConnection;
-  sender: MessageNodeConnection;
-  destination: MessageNodeConnection;
-};
-
-
-export type UserNodeFollowingUsersArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  profileName?: Maybe<Scalars['String']>;
-  profileName_Icontains?: Maybe<Scalars['String']>;
-  isCollegeStudent?: Maybe<Scalars['Boolean']>;
-  schoolName?: Maybe<Scalars['String']>;
-  schoolName_Icontains?: Maybe<Scalars['String']>;
-  selectedAddress?: Maybe<Scalars['ID']>;
-  selectedGender?: Maybe<Scalars['ID']>;
-};
-
-
-export type UserNodePostedUserArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  title_Icontains?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['String']>;
-  content_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type UserNodeReviewedUserArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stars?: Maybe<Scalars['Int']>;
-  reviewText?: Maybe<Scalars['String']>;
-  reviewText_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type UserNodeSenderArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  text_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type UserNodeDestinationArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  text_Icontains?: Maybe<Scalars['String']>;
 };
 
 export type UserNodeConnection = {
@@ -743,6 +401,24 @@ export type UserNodeEdge = {
   /** A cursor for use in pagination */
   cursor: Scalars['String'];
 };
+
+export type CreateNewsMutationVariables = Exact<{
+  url: Scalars['String'];
+  selectCategoryId?: Maybe<Scalars['ID']>;
+  tagIds?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
+}>;
+
+
+export type CreateNewsMutation = (
+  { __typename?: 'Mutation' }
+  & { createNews?: Maybe<(
+    { __typename?: 'CreateNewsMutationPayload' }
+    & { news?: Maybe<(
+      { __typename?: 'NewsNode' }
+      & Pick<NewsNode, 'id' | 'title' | 'url' | 'createdAt'>
+    )> }
+  )> }
+);
 
 export type CreateUserMutationVariables = Exact<{
   email: Scalars['String'];
@@ -788,7 +464,92 @@ export type RefreshTokensMutation = (
   )> }
 );
 
+export type RevokeRefreshTokenMutationVariables = Exact<{
+  refreshToken: Scalars['String'];
+}>;
 
+
+export type RevokeRefreshTokenMutation = (
+  { __typename?: 'Mutation' }
+  & { revokeToken?: Maybe<(
+    { __typename?: 'Revoke' }
+    & Pick<Revoke, 'revoked'>
+  )> }
+);
+
+export type GetAllNewsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllNewsQuery = (
+  { __typename?: 'Query' }
+  & { allNews?: Maybe<(
+    { __typename?: 'NewsNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'NewsNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'NewsNode' }
+        & Pick<NewsNode, 'id' | 'url' | 'title' | 'summary' | 'imagePath' | 'createdAt'>
+        & { selectCategory?: Maybe<(
+          { __typename?: 'CategoryNode' }
+          & Pick<CategoryNode, 'id' | 'categoryName'>
+        )>, tags: (
+          { __typename?: 'TagNodeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'TagNodeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'TagNode' }
+              & Pick<TagNode, 'id' | 'tagName'>
+            )> }
+          )>> }
+        ) }
+      )> }
+    )>> }
+  )> }
+);
+
+
+export const CreateNewsDocument = gql`
+    mutation CreateNews($url: String!, $selectCategoryId: ID, $tagIds: [ID]) {
+  createNews(
+    input: {url: $url, selectCategoryId: $selectCategoryId, tagIds: $tagIds}
+  ) {
+    news {
+      id
+      title
+      url
+      createdAt
+    }
+  }
+}
+    `;
+export type CreateNewsMutationFn = Apollo.MutationFunction<CreateNewsMutation, CreateNewsMutationVariables>;
+
+/**
+ * __useCreateNewsMutation__
+ *
+ * To run a mutation, you first call `useCreateNewsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateNewsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createNewsMutation, { data, loading, error }] = useCreateNewsMutation({
+ *   variables: {
+ *      url: // value for 'url'
+ *      selectCategoryId: // value for 'selectCategoryId'
+ *      tagIds: // value for 'tagIds'
+ *   },
+ * });
+ */
+export function useCreateNewsMutation(baseOptions?: Apollo.MutationHookOptions<CreateNewsMutation, CreateNewsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateNewsMutation, CreateNewsMutationVariables>(CreateNewsDocument, options);
+      }
+export type CreateNewsMutationHookResult = ReturnType<typeof useCreateNewsMutation>;
+export type CreateNewsMutationResult = Apollo.MutationResult<CreateNewsMutation>;
+export type CreateNewsMutationOptions = Apollo.BaseMutationOptions<CreateNewsMutation, CreateNewsMutationVariables>;
 export const CreateUserDocument = gql`
     mutation CreateUser($email: String!, $password: String!) {
   createUser(input: {email: $email, password: $password}) {
@@ -899,3 +660,91 @@ export function useRefreshTokensMutation(baseOptions?: Apollo.MutationHookOption
 export type RefreshTokensMutationHookResult = ReturnType<typeof useRefreshTokensMutation>;
 export type RefreshTokensMutationResult = Apollo.MutationResult<RefreshTokensMutation>;
 export type RefreshTokensMutationOptions = Apollo.BaseMutationOptions<RefreshTokensMutation, RefreshTokensMutationVariables>;
+export const RevokeRefreshTokenDocument = gql`
+    mutation RevokeRefreshToken($refreshToken: String!) {
+  revokeToken(refreshToken: $refreshToken) {
+    revoked
+  }
+}
+    `;
+export type RevokeRefreshTokenMutationFn = Apollo.MutationFunction<RevokeRefreshTokenMutation, RevokeRefreshTokenMutationVariables>;
+
+/**
+ * __useRevokeRefreshTokenMutation__
+ *
+ * To run a mutation, you first call `useRevokeRefreshTokenMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRevokeRefreshTokenMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [revokeRefreshTokenMutation, { data, loading, error }] = useRevokeRefreshTokenMutation({
+ *   variables: {
+ *      refreshToken: // value for 'refreshToken'
+ *   },
+ * });
+ */
+export function useRevokeRefreshTokenMutation(baseOptions?: Apollo.MutationHookOptions<RevokeRefreshTokenMutation, RevokeRefreshTokenMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RevokeRefreshTokenMutation, RevokeRefreshTokenMutationVariables>(RevokeRefreshTokenDocument, options);
+      }
+export type RevokeRefreshTokenMutationHookResult = ReturnType<typeof useRevokeRefreshTokenMutation>;
+export type RevokeRefreshTokenMutationResult = Apollo.MutationResult<RevokeRefreshTokenMutation>;
+export type RevokeRefreshTokenMutationOptions = Apollo.BaseMutationOptions<RevokeRefreshTokenMutation, RevokeRefreshTokenMutationVariables>;
+export const GetAllNewsDocument = gql`
+    query GetAllNews {
+  allNews {
+    edges {
+      node {
+        id
+        url
+        title
+        summary
+        imagePath
+        createdAt
+        selectCategory {
+          id
+          categoryName
+        }
+        tags {
+          edges {
+            node {
+              id
+              tagName
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllNewsQuery__
+ *
+ * To run a query within a React component, call `useGetAllNewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllNewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllNewsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllNewsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllNewsQuery, GetAllNewsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllNewsQuery, GetAllNewsQueryVariables>(GetAllNewsDocument, options);
+      }
+export function useGetAllNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllNewsQuery, GetAllNewsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllNewsQuery, GetAllNewsQueryVariables>(GetAllNewsDocument, options);
+        }
+export type GetAllNewsQueryHookResult = ReturnType<typeof useGetAllNewsQuery>;
+export type GetAllNewsLazyQueryHookResult = ReturnType<typeof useGetAllNewsLazyQuery>;
+export type GetAllNewsQueryResult = Apollo.QueryResult<GetAllNewsQuery, GetAllNewsQueryVariables>;

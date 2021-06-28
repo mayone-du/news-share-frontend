@@ -31,6 +31,13 @@ export const Sidebar: React.VFC = () => {
             </Link>
           </li>
           <li>
+            <Link href="/archive">
+              <a className="block py-2 text-center border-b">
+                <div>archive</div>
+              </a>
+            </Link>
+          </li>
+          <li>
             <Link href="/category">
               <a className="block py-2 text-center border-b">
                 <div>category</div>

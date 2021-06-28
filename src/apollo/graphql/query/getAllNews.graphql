@@ -1,0 +1,26 @@
+query GetAllNews {
+  allNews {
+    edges {
+      node {
+        id
+        url
+        title
+        summary
+        imagePath
+        createdAt
+        selectCategory {
+          id
+          categoryName
+        }
+        tags {
+          edges {
+            node {
+              id
+              tagName
+            }
+          }
+        }
+      }
+    }
+  }
+}

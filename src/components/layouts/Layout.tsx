@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Footer } from "src/components/layouts/Footer";
 import { Header } from "src/components/layouts/Header";
+import { Sidebar } from "src/components/layouts/Sidebar";
 
 type Props = {
   metaTitle: string;
@@ -27,7 +28,7 @@ export const Layout: React.FC<Props> = (props) => {
         <link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png" />
         <link rel="icon" sizes="512x512" href="/pwa/icons/icon-512x512.png" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/pwa/manifest.json" />
 
         <meta name="msapplication-square70x70logo" content="/site-tile-70x70.png" />
         <meta name="msapplication-square150x150logo" content="/site-tile-150x150.png" />
@@ -44,11 +45,14 @@ export const Layout: React.FC<Props> = (props) => {
         <meta name="theme-color" content="#000" />
         <meta name="description" content="this is myapp" />
         <link rel="icon" sizes="512x512" href="/pwa/icons/icon-512x512.png" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/favicon.ico" />
         <link rel="manifest" href="/pwa/manifest.json" />
       </Head>
       <Header />
-      <main>{props.children}</main>
+      <div className="flex">
+        <Sidebar />
+        <main className="block w-full">{props.children}</main>
+      </div>
       <Footer />
     </div>
   );

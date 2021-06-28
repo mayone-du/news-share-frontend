@@ -1,13 +1,18 @@
 import type { NextPage } from "next";
 import { Layout } from "src/components/layouts/Layout";
-import { ThemeChanger } from "src/components/ThemeChanger";
+import { NewsForm } from "src/components/NewsForm";
+import { TodayNewsList } from "src/components/TodayNewsList";
 
 const Index: NextPage = () => {
   return (
     <Layout metaTitle="Index Page">
-      <div className="flex flex-col justify-center items-center min-h-screen">
-        <div className="text-5xl">Index Page</div>
-        <ThemeChanger />
+      <div className="flex w-full">
+        <div className="w-1/2">
+          <NewsForm />
+        </div>
+        <div className="w-1/2">
+          <TodayNewsList />
+        </div>
       </div>
     </Layout>
   );

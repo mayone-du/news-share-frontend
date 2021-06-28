@@ -4,7 +4,6 @@ import { useCreateNewsMutation } from "src/apollo/schema";
 
 export const useCreateNews = () => {
   const [newsUrl, setNewsUrl] = useState("");
-  const [newsTitle, setNewsTitle] = useState("");
   const [createNewsMutation] = useCreateNewsMutation();
 
   const handleChangeNewsUrl = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,11 +13,14 @@ export const useCreateNews = () => {
     async (e: React.ChangeEvent<HTMLFormElement>) => {
       e.preventDefault();
 
+      // 入力欄の検証
       if (newsUrl === "") {
         toast.error("ニュースのURLを入力してください。");
         return;
+      } else if (!newsUrl.includes("http://") && !newsUrl.includes("https://")) {
+        toast.error("https://が入ってません");
+        return;
       }
-
       try {
         await createNewsMutation({
           variables: {
@@ -32,7 +34,7 @@ export const useCreateNews = () => {
         return;
       }
     },
-    [newsUrl],
+    [newsUrl, createNewsMutation],
   );
-  return { newsUrl, handleChangeNewsUrl, newsTitle, setNewsTitle, handleCreateNews };
+  return { newsUrl, handleChangeNewsUrl, handleCreateNews };
 };

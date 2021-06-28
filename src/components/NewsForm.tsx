@@ -7,13 +7,13 @@ export const NewsForm: React.VFC = () => {
     <form onSubmit={handleCreateNews}>
       <Headline2 text="ニュースをシェア" />
       <input
-        className="block p-2 mx-auto w-2/3 rounded-none border focus:outline-none"
+        className="block p-2 mx-auto w-3/4 rounded-none border focus:outline-none"
         type="text"
-        placeholder="url"
+        placeholder="ニュースのURLを入力。https://qin.news/shimabu-ikemen..."
         value={newsUrl}
         onChange={handleChangeNewsUrl}
       />
-      <button type="submit" className="block py-2 px-4 mx-auto border">
+      <button type="submit" className="block py-2 px-4 my-4 mx-auto border">
         シェア
       </button>
     </form>

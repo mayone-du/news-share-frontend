@@ -6,7 +6,7 @@ import { TodayNewsList } from "src/components/TodayNewsList";
 const Index: NextPage = () => {
   return (
     <Layout metaTitle="Index Page">
-      <div className="flex w-full">
+      <div className="flex my-8 w-full bg-gray-50 rounded-lg">
         <div className="w-1/2">
           <NewsForm />
         </div>

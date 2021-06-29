@@ -1,11 +1,9 @@
-import { Headline2 } from "src/components/Headline2";
 import { useCreateNews } from "src/libs/hooks/useCreateNews";
 
 export const NewsForm: React.VFC = () => {
   const { newsUrl, handleChangeNewsUrl, handleCreateNews } = useCreateNews();
   return (
     <form onSubmit={handleCreateNews}>
-      <Headline2 text="ニュースをシェア" />
       <input
         className="block p-2 mx-auto w-3/4 rounded-none border focus:outline-none"
         type="text"

@@ -1,0 +1,14 @@
+query GetTodayNews {
+  todayNews {
+    edges {
+      node {
+        id
+        url
+        title
+        summary
+        createdAt
+        imagePath
+      }
+    }
+  }
+}

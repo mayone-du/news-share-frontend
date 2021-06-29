@@ -51,7 +51,7 @@ export const Layout: React.FC<Props> = (props) => {
       <Header />
       <div className="flex">
         <Sidebar />
-        <main className="block px-20 w-full">{props.children}</main>
+        <main className="block px-20 w-full bg-gray-50 dark:bg-gray-800">{props.children}</main>
       </div>
       <Footer />
     </div>

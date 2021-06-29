@@ -9,21 +9,21 @@ export const NewsList: React.VFC<Props> = (props) => {
       {props.data &&
         props.data.edges.map((news: any, index: any) => {
           return (
-            <li key={index}>
+            <li key={index} className="border-t md:border-none">
               <a
                 target="blank"
                 rel="noopener"
-                className="flex items-center w-full hover:bg-gray-100 dark:hover:bg-gray-800 border-t"
+                className="block md:flex items-center w-full hover:bg-gray-100 dark:hover:bg-gray-800 md:border-t"
                 href={news?.node?.url}
               >
                 <img
-                  className="object-cover w-20 h-20"
+                  className="object-cover w-full md:w-20 h-auto md:h-20"
                   src={news?.node?.imagePath ? news.node.imagePath : ""}
                   alt=""
                 />
                 {news?.node ? (
                   <div className="px-4 w-full">
-                    <h3 className="font-bold">{news.node.title}</h3>
+                    <h3 className="text-sm md:text-base font-bold">{news.node.title}</h3>
                     <p className="text-xs text-blue-800 dark:text-blue-400">
                       {news.node.summary ? news.node.summary : "概要はありません。"}
                     </p>

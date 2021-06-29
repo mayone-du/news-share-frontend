@@ -12,11 +12,11 @@ export const Sidebar: React.VFC<Props> = (props) => {
             <Link href="/">
               <a
                 className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
-                  props.currentPagePath === "/" ? "bg-blue-400" : null
+                  props.currentPagePath === "/" ? "bg-blue-200 dark:bg-blue-700" : null
                 }`}
               >
                 <div className="flex items-center">
-                  <span className="block mx-8">
+                  <span className="block px-4 md:px-0 md:mx-8">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="block w-6 h-6"
@@ -32,7 +32,7 @@ export const Sidebar: React.VFC<Props> = (props) => {
                       />
                     </svg>
                   </span>
-                  <span className="block">ホーム</span>
+                  <span className="hidden md:block">ホーム</span>
                 </div>
               </a>
             </Link>
@@ -41,11 +41,11 @@ export const Sidebar: React.VFC<Props> = (props) => {
             <Link href="/archive">
               <a
                 className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
-                  props.currentPagePath === "/archive" ? "bg-blue-400" : null
+                  props.currentPagePath === "/archive" ? "bg-blue-200 dark:bg-blue-700" : null
                 }`}
               >
                 <div className="flex items-center">
-                  <span className="block mx-8">
+                  <span className="block px-4 md:px-0 md:mx-8">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="w-6 h-6"
@@ -61,7 +61,7 @@ export const Sidebar: React.VFC<Props> = (props) => {
                       />
                     </svg>
                   </span>
-                  <span className="block">アーカイブ</span>
+                  <span className="hidden md:block">アーカイブ</span>
                 </div>
               </a>
             </Link>
@@ -70,11 +70,11 @@ export const Sidebar: React.VFC<Props> = (props) => {
             <Link href="/category">
               <a
                 className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
-                  props.currentPagePath === "/category" ? "bg-blue-400" : null
+                  props.currentPagePath === "/category" ? "bg-blue-200 dark:bg-blue-700" : null
                 }`}
               >
                 <div className="flex items-center">
-                  <span className="block mx-8">
+                  <span className="block px-4 md:px-0 md:mx-8">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="w-6 h-6"
@@ -90,7 +90,7 @@ export const Sidebar: React.VFC<Props> = (props) => {
                       />
                     </svg>
                   </span>
-                  <span className="block">カテゴリー</span>
+                  <span className="hidden md:block">カテゴリー</span>
                 </div>
               </a>
             </Link>
@@ -99,11 +99,11 @@ export const Sidebar: React.VFC<Props> = (props) => {
             <Link href="/search">
               <a
                 className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
-                  props.currentPagePath === "/search" ? "bg-blue-400" : null
+                  props.currentPagePath === "/search" ? "bg-blue-200 dark:bg-blue-700" : null
                 }`}
               >
                 <div className="flex items-center">
-                  <span className="block mx-8">
+                  <span className="block px-4 md:px-0 md:mx-8">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="w-6 h-6"
@@ -119,7 +119,7 @@ export const Sidebar: React.VFC<Props> = (props) => {
                       />
                     </svg>
                   </span>
-                  <span className="block">検索</span>
+                  <span className="hidden md:block">検索</span>
                 </div>
               </a>
             </Link>

@@ -52,8 +52,8 @@ export const Layout: React.FC<Props> = (props) => {
       <Header />
       <div className="flex">
         <Sidebar currentPagePath={props.currentPagePath} />
-        <main className="block px-20 w-full bg-gray-50 dark:bg-gray-800">
-          <div className="overflow-hidden my-10 w-full bg-white dark:bg-black rounded-lg border">
+        <main className="block px-4 md:px-20 w-full bg-gray-50 dark:bg-gray-800">
+          <div className="overflow-hidden my-4 md:my-10 w-full bg-white dark:bg-black rounded-lg border">
             {props.children}
           </div>
         </main>

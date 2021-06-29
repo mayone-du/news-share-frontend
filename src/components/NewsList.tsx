@@ -17,7 +17,7 @@ export const NewsList: React.VFC<Props> = (props) => {
                 href={news?.node?.url}
               >
                 <img
-                  className="object-cover w-full md:w-20 h-auto md:h-20"
+                  className="block object-cover w-full md:w-20 h-auto md:h-20"
                   src={news?.node?.imagePath ? news.node.imagePath : ""}
                   alt=""
                 />

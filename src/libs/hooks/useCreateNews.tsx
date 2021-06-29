@@ -24,7 +24,7 @@ export const useCreateNews = () => {
         toast.error("ニュースのURLを入力してください。");
         return;
       } else if (!newsUrl.includes("http://") && !newsUrl.includes("https://")) {
-        toast.error("https://が入ってません");
+        toast.error("正しいURLの形式で入力してください。");
         return;
       }
       try {
@@ -38,7 +38,8 @@ export const useCreateNews = () => {
         toast.success("作成されました。");
         setNewsUrl("");
       } catch (error) {
-        alert(error);
+        toast.error("何らかのエラーが発生しました。");
+        console.error(error);
         return;
       }
     },

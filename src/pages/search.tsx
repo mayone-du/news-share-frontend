@@ -8,7 +8,7 @@ const SearchPage: NextPage = () => {
     <Layout metaTitle="検索 | Qin 夜活ニュースシェア" currentPagePath="/search">
       <div>
         <Headline2 text="検索" />
-        <div className="pb-8 mx-auto w-2/3">
+        <div className="pb-8 mx-auto w-5/6 md:w-2/3">
           <SearchForm />
         </div>
       </div>

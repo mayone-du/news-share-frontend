@@ -12,7 +12,7 @@ export const NewsForm: React.VFC = () => {
     <form onSubmit={handleCreateNews}>
       <input
         className="block p-2 mx-auto w-3/4 rounded-none border focus:outline-none"
-        type="text"
+        type="url"
         placeholder="ニュースのURLを入力。https://qin.news/shimabu-ikemen..."
         value={newsUrl}
         onChange={handleChangeNewsUrl}
@@ -20,7 +20,7 @@ export const NewsForm: React.VFC = () => {
       <input
         className="block p-2 mx-auto w-3/4 rounded-none border focus:outline-none"
         type="text"
-        placeholder="名前を入力"
+        placeholder="ニックネーム"
         value={contributorName}
         onChange={handleChangeContributorName}
       />

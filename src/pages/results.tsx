@@ -13,7 +13,10 @@ const ResultsPage: NextPage = () => {
   });
 
   return (
-    <Layout metaTitle={`${searchKeyword}の検索結果 | Qin 夜活ニュースシェア`}>
+    <Layout
+      metaTitle={`${searchKeyword}の検索結果 | Qin 夜活ニュースシェア`}
+      currentPagePath="/results"
+    >
       <div>
         <Headline2 text={`"${searchKeyword}"を含む検索結果`} />
         {isLoading && <div>loading</div>}

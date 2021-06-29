@@ -5,7 +5,7 @@ import { SearchForm } from "src/components/SearchForm";
 
 const SearchPage: NextPage = () => {
   return (
-    <Layout metaTitle="検索 | Qin 夜活ニュースシェア">
+    <Layout metaTitle="検索 | Qin 夜活ニュースシェア" currentPagePath="/search">
       <div>
         <Headline2 text="検索" />
         <div className="pb-8 mx-auto w-2/3">

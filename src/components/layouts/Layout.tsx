@@ -5,6 +5,7 @@ import { Sidebar } from "src/components/layouts/Sidebar";
 
 type Props = {
   metaTitle: string;
+  currentPagePath: string;
 };
 
 export const Layout: React.FC<Props> = (props) => {
@@ -50,7 +51,7 @@ export const Layout: React.FC<Props> = (props) => {
       </Head>
       <Header />
       <div className="flex">
-        <Sidebar />
+        <Sidebar currentPagePath={props.currentPagePath} />
         <main className="block px-20 w-full bg-gray-50 dark:bg-gray-800">
           <div className="overflow-hidden my-10 w-full bg-white dark:bg-black rounded-lg border">
             {props.children}

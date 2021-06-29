@@ -1,13 +1,20 @@
 import Link from "next/link";
 
-export const Sidebar: React.VFC = () => {
+type Props = {
+  currentPagePath: string;
+};
+export const Sidebar: React.VFC<Props> = (props) => {
   return (
     <aside className="block w-1/6 min-h-screen border-r">
       <nav>
         <ul>
           <li>
             <Link href="/">
-              <a className="block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+              <a
+                className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
+                  props.currentPagePath === "/" ? "bg-blue-400" : null
+                }`}
+              >
                 <div className="flex items-center">
                   <span className="block mx-8">
                     <svg
@@ -32,7 +39,11 @@ export const Sidebar: React.VFC = () => {
           </li>
           <li>
             <Link href="/archive">
-              <a className="block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+              <a
+                className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
+                  props.currentPagePath === "/archive" ? "bg-blue-400" : null
+                }`}
+              >
                 <div className="flex items-center">
                   <span className="block mx-8">
                     <svg
@@ -57,7 +68,11 @@ export const Sidebar: React.VFC = () => {
           </li>
           <li>
             <Link href="/category">
-              <a className="block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+              <a
+                className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
+                  props.currentPagePath === "/category" ? "bg-blue-400" : null
+                }`}
+              >
                 <div className="flex items-center">
                   <span className="block mx-8">
                     <svg
@@ -82,7 +97,11 @@ export const Sidebar: React.VFC = () => {
           </li>
           <li>
             <Link href="/search">
-              <a className="block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+              <a
+                className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
+                  props.currentPagePath === "/search" ? "bg-blue-400" : null
+                }`}
+              >
                 <div className="flex items-center">
                   <span className="block mx-8">
                     <svg

@@ -4,7 +4,7 @@ import { Layout } from "src/components/layouts/Layout";
 
 const CategoryPage: NextPage = () => {
   return (
-    <Layout metaTitle="カテゴリー | Qin 夜活ニュースシェア">
+    <Layout metaTitle="カテゴリー | Qin 夜活ニュースシェア" currentPagePath="/category">
       <div>
         <Headline2 text="カテゴリー" />
         <p className="text-xl text-center">

@@ -29,7 +29,7 @@ export const NewsList: React.VFC<Props> = (props) => {
                     </p>
                     <div className="flex justify-between items-center w-full text-xs text-gray-500">
                       <div>{fixDateFormat(news.node.createdAt)}</div>
-                      <div>{news.node.contributorName ? news.node.contributorName : "未設定"}</div>
+                      <div>{news.node.contributorName ? news.node.contributorName : "匿名"}</div>
                     </div>
                   </div>
                 ) : (

@@ -1,3 +1,4 @@
+import { NewsCreating } from "src/components/NewsCreating";
 import { useCreateNews } from "src/libs/hooks/useCreateNews";
 
 export const NewsForm: React.VFC = () => {
@@ -32,11 +33,7 @@ export const NewsForm: React.VFC = () => {
       >
         シェアする
       </button>
-      {isCreating && (
-        <div className="flex absolute top-0 left-0 z-10 justify-center items-center w-screen h-screen bg-gray-300">
-          Loading...
-        </div>
-      )}
+      {isCreating && <NewsCreating />}
     </form>
   );
 };

@@ -1,7 +1,7 @@
 {
-    "name":             "template",
-    "short_name":       "template",
-    "description":      "template app",
+    "name":             "Qin News-Share",
+    "short_name":       "Qin News-Share",
+    "description":      "Qin 夜活用ニュースシェアアプリ",
     "start_url":        "/",
     "display":          "standalone",
     "orientation":      "portrate-primary",

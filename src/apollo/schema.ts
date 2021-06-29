@@ -544,6 +544,25 @@ export type GetTodayNewsQuery = (
   )> }
 );
 
+export type SearchNewsQueryVariables = Exact<{
+  searchTitleKeyword: Scalars['String'];
+}>;
+
+
+export type SearchNewsQuery = (
+  { __typename?: 'Query' }
+  & { allNews?: Maybe<(
+    { __typename?: 'NewsNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'NewsNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'NewsNode' }
+        & Pick<NewsNode, 'id' | 'title' | 'url' | 'summary' | 'createdAt' | 'imagePath' | 'contributorName'>
+      )> }
+    )>> }
+  )> }
+);
+
 
 export const CreateNewsDocument = gql`
     mutation CreateNews($url: String!, $contributorName: String, $selectCategoryId: ID, $tagIds: [ID]) {
@@ -828,3 +847,48 @@ export function useGetTodayNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetTodayNewsQueryHookResult = ReturnType<typeof useGetTodayNewsQuery>;
 export type GetTodayNewsLazyQueryHookResult = ReturnType<typeof useGetTodayNewsLazyQuery>;
 export type GetTodayNewsQueryResult = Apollo.QueryResult<GetTodayNewsQuery, GetTodayNewsQueryVariables>;
+export const SearchNewsDocument = gql`
+    query SearchNews($searchTitleKeyword: String!) {
+  allNews(title_Icontains: $searchTitleKeyword) {
+    edges {
+      node {
+        id
+        title
+        url
+        summary
+        createdAt
+        imagePath
+        contributorName
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchNewsQuery__
+ *
+ * To run a query within a React component, call `useSearchNewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchNewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchNewsQuery({
+ *   variables: {
+ *      searchTitleKeyword: // value for 'searchTitleKeyword'
+ *   },
+ * });
+ */
+export function useSearchNewsQuery(baseOptions: Apollo.QueryHookOptions<SearchNewsQuery, SearchNewsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchNewsQuery, SearchNewsQueryVariables>(SearchNewsDocument, options);
+      }
+export function useSearchNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchNewsQuery, SearchNewsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchNewsQuery, SearchNewsQueryVariables>(SearchNewsDocument, options);
+        }
+export type SearchNewsQueryHookResult = ReturnType<typeof useSearchNewsQuery>;
+export type SearchNewsLazyQueryHookResult = ReturnType<typeof useSearchNewsLazyQuery>;
+export type SearchNewsQueryResult = Apollo.QueryResult<SearchNewsQuery, SearchNewsQueryVariables>;

@@ -1,0 +1,15 @@
+query SearchNews($searchTitleKeyword: String!) {
+  allNews(title_Icontains: $searchTitleKeyword) {
+    edges {
+      node {
+        id
+        title
+        url
+        summary
+        createdAt
+        imagePath
+        contributorName
+      }
+    }
+  }
+}

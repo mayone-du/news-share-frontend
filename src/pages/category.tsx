@@ -7,6 +7,12 @@ const CategoryPage: NextPage = () => {
     <Layout metaTitle="カテゴリー | Qin 夜活ニュースシェア">
       <div>
         <Headline2 text="カテゴリー" />
+        <p className="text-xl text-center">
+          現在開発中です
+          <span role="img" aria-label="お辞儀">
+            🙇‍♂️
+          </span>
+        </p>
       </div>
     </Layout>
   );

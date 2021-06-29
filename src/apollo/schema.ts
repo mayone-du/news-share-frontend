@@ -545,7 +545,7 @@ export type GetTodayNewsQuery = (
 );
 
 export type SearchNewsQueryVariables = Exact<{
-  searchTitleKeyword: Scalars['String'];
+  searchTitleKeyword?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -848,7 +848,7 @@ export type GetTodayNewsQueryHookResult = ReturnType<typeof useGetTodayNewsQuery
 export type GetTodayNewsLazyQueryHookResult = ReturnType<typeof useGetTodayNewsLazyQuery>;
 export type GetTodayNewsQueryResult = Apollo.QueryResult<GetTodayNewsQuery, GetTodayNewsQueryVariables>;
 export const SearchNewsDocument = gql`
-    query SearchNews($searchTitleKeyword: String!) {
+    query SearchNews($searchTitleKeyword: String) {
   allNews(title_Icontains: $searchTitleKeyword) {
     edges {
       node {
@@ -881,7 +881,7 @@ export const SearchNewsDocument = gql`
  *   },
  * });
  */
-export function useSearchNewsQuery(baseOptions: Apollo.QueryHookOptions<SearchNewsQuery, SearchNewsQueryVariables>) {
+export function useSearchNewsQuery(baseOptions?: Apollo.QueryHookOptions<SearchNewsQuery, SearchNewsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<SearchNewsQuery, SearchNewsQueryVariables>(SearchNewsDocument, options);
       }

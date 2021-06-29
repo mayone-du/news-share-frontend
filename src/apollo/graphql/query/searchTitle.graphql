@@ -1,4 +1,4 @@
-query SearchNews($searchTitleKeyword: String!) {
+query SearchNews($searchTitleKeyword: String) {
   allNews(title_Icontains: $searchTitleKeyword) {
     edges {
       node {

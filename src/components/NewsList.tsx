@@ -21,17 +21,15 @@ export const NewsList: React.VFC<Props> = (props) => {
                   src={news?.node?.imagePath ? news.node.imagePath : ""}
                   alt=""
                 />
-                {news?.node?.title ? (
-                  <div className="px-4">
-                    <h3 className="font-bold">{news?.node?.title}</h3>
+                {news?.node ? (
+                  <div className="px-4 w-full">
+                    <h3 className="font-bold">{news.node.title}</h3>
                     <p className="text-xs text-blue-800 dark:text-blue-400">
-                      {news?.node?.summary ? news.node.summary : "概要はありません。"}
+                      {news.node.summary ? news.node.summary : "概要はありません。"}
                     </p>
-                    <div className="flex justify-between items-center text-xs text-gray-500">
-                      <div>{fixDateFormat(news?.node?.createdAt)}</div>
-                      <div>
-                        {news?.node?.contributorName ? news.node.contributorName : "未設定"}
-                      </div>
+                    <div className="flex justify-between items-center w-full text-xs text-gray-500">
+                      <div>{fixDateFormat(news.node.createdAt)}</div>
+                      <div>{news.node.contributorName ? news.node.contributorName : "未設定"}</div>
                     </div>
                   </div>
                 ) : (

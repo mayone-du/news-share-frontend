@@ -8,7 +8,7 @@ import { Headline2 } from "src/components/Headline2";
 import { Layout } from "src/components/layouts/Layout";
 import { NewsForm } from "src/components/NewsForm";
 import { NewsList } from "src/components/NewsList";
-
+import { NewsLoading } from "src/components/NewsLoading";
 // export const getStaticProps: GetStaticProps = async () => {
 //   const apolloClient = initializeApollo(null);
 //   const { data: todayNewsData } = await apolloClient.query<
@@ -33,22 +33,23 @@ import { NewsList } from "src/components/NewsList";
 // const Index: NextPage<Props<GetTodayNewsQuery>> = (props) => {
 const Index: NextPage = () => {
   // 開発環境では1時間、本番環境では1秒ごとにポーリング
-  const { data } = useGetTodayNewsQuery({
+  const { data, loading: isLoading } = useGetTodayNewsQuery({
     pollInterval: process.env.NODE_ENV === "development" ? 1000 * 60 * 60 : 1000,
   });
 
   return (
     <Layout metaTitle="Qin 夜活ニュースシェア" currentPagePath="/">
-      <div className="flex">
-        <div className="w-1/2">
+      <div className="md:flex">
+        <div className="md:w-1/2">
           <Headline2 text="ニュースをシェア" />
           <NewsForm />
         </div>
-        <div className="w-1/2">
+        <div className="md:w-1/2">
           <div className="border-l">
             <Headline2 text="今日のニュース" />
             {/* <NewsList data={props.todayNewsData.todayNews} /> */}
-            <NewsList data={data?.todayNews} />
+            {data?.todayNews && <NewsList data={data?.todayNews} />}
+            {isLoading && <NewsLoading />}
           </div>
         </div>
       </div>

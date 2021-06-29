@@ -1,3 +1,4 @@
+import party from "party-js";
 import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useCreateNewsMutation } from "src/apollo/schema";
@@ -33,6 +34,7 @@ export const useCreateNews = () => {
             contributorName: contributorName,
           },
         });
+        party.confetti(e.target);
         toast.success("作成されました。");
         setNewsUrl("");
       } catch (error) {

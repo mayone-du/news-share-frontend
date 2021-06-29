@@ -25,8 +25,11 @@ export const NewsForm: React.VFC = () => {
         onChange={handleChangeContributorName}
       />
 
-      <button type="submit" className="block py-2 px-4 my-4 mx-auto border">
-        シェア
+      <button
+        type="submit"
+        className="block py-2 px-8 my-4 mx-auto hover:bg-gray-100 dark:hover:bg-gray-800 rounded-3xl border"
+      >
+        シェアする
       </button>
     </form>
   );

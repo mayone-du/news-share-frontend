@@ -51,7 +51,11 @@ export const Layout: React.FC<Props> = (props) => {
       <Header />
       <div className="flex">
         <Sidebar />
-        <main className="block px-20 w-full bg-gray-50 dark:bg-gray-800">{props.children}</main>
+        <main className="block px-20 w-full bg-gray-50 dark:bg-gray-800">
+          <div className="overflow-hidden my-10 w-full bg-white dark:bg-black rounded-lg border">
+            {props.children}
+          </div>
+        </main>
       </div>
       <Footer />
     </div>

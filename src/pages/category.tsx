@@ -5,7 +5,9 @@ import { Layout } from "src/components/layouts/Layout";
 const CategoryPage: NextPage = () => {
   return (
     <Layout metaTitle="カテゴリー | Qin 夜活ニュースシェア">
-      <Headline2 text="カテゴリー" />
+      <div>
+        <Headline2 text="カテゴリー" />
+      </div>
     </Layout>
   );
 };

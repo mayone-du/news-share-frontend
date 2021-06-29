@@ -5,7 +5,9 @@ import { Layout } from "src/components/layouts/Layout";
 const SearchPage: NextPage = () => {
   return (
     <Layout metaTitle="検索 | Qin 夜活ニュースシェア">
-      <Headline2 text="検索" />
+      <div>
+        <Headline2 text="検索" />
+      </div>
     </Layout>
   );
 };

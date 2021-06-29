@@ -31,7 +31,7 @@ type Props<T> = {
 const Index: NextPage<Props<GetTodayNewsQuery>> = (props) => {
   return (
     <Layout metaTitle="Qin 夜活ニュースシェア">
-      <div className="flex overflow-hidden my-8 w-full bg-white dark:bg-black rounded-lg border">
+      <div className="flex">
         <div className="w-1/2">
           <Headline2 text="ニュースをシェア" />
           <NewsForm />

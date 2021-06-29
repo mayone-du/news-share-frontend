@@ -7,7 +7,7 @@ export const Sidebar: React.VFC = () => {
         <ul>
           <li>
             <Link href="/">
-              <a className="block py-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+              <a className="block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
                 <div className="flex items-center">
                   <span className="block mx-8">
                     <svg
@@ -32,7 +32,7 @@ export const Sidebar: React.VFC = () => {
           </li>
           <li>
             <Link href="/archive">
-              <a className="block py-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+              <a className="block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
                 <div className="flex items-center">
                   <span className="block mx-8">
                     <svg
@@ -57,7 +57,7 @@ export const Sidebar: React.VFC = () => {
           </li>
           <li>
             <Link href="/category">
-              <a className="block py-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+              <a className="block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
                 <div className="flex items-center">
                   <span className="block mx-8">
                     <svg
@@ -82,7 +82,7 @@ export const Sidebar: React.VFC = () => {
           </li>
           <li>
             <Link href="/search">
-              <a className="block py-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+              <a className="block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
                 <div className="flex items-center">
                   <span className="block mx-8">
                     <svg

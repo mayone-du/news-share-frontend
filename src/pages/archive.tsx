@@ -29,8 +29,10 @@ type Props<T> = {
 const ArchivePage: NextPage<Props<GetAllNewsQuery>> = (props) => {
   return (
     <Layout metaTitle="アーカイブ | Qin 夜活ニュースシェア">
-      <Headline2 text="アーカイブ" />
-      <NewsList data={props.allNewsData.allNews} />
+      <div>
+        <Headline2 text="アーカイブ" />
+        <NewsList data={props.allNewsData.allNews} />
+      </div>
     </Layout>
   );
 };

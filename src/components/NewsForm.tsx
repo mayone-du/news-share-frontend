@@ -7,9 +7,10 @@ export const NewsForm: React.VFC = () => {
     contributorName,
     handleChangeContributorName,
     handleCreateNews,
+    isCreating,
   } = useCreateNews();
   return (
-    <form onSubmit={handleCreateNews}>
+    <form onSubmit={handleCreateNews} className="relative">
       <input
         className="block p-2 mx-auto w-3/4 rounded-none border focus:outline-none"
         type="url"
@@ -31,6 +32,11 @@ export const NewsForm: React.VFC = () => {
       >
         シェアする
       </button>
+      {isCreating && (
+        <div className="flex absolute top-0 left-0 z-10 justify-center items-center w-screen h-screen bg-gray-300">
+          Loading...
+        </div>
+      )}
     </form>
   );
 };

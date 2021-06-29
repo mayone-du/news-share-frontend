@@ -7,6 +7,7 @@ export const useCreateNews = () => {
   const [newsUrl, setNewsUrl] = useState("");
   const [contributorName, setContributorName] = useState("");
   const [createNewsMutation] = useCreateNewsMutation();
+  const [isCreating, setIsCreating] = useState(false);
 
   const handleChangeNewsUrl = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setNewsUrl(e.target.value);
@@ -28,16 +29,19 @@ export const useCreateNews = () => {
         return;
       }
       try {
+        setIsCreating(true);
         await createNewsMutation({
           variables: {
             url: newsUrl,
             contributorName: contributorName,
           },
         });
+        setIsCreating(false);
         party.confetti(e.target);
         toast.success("作成されました。");
         setNewsUrl("");
       } catch (error) {
+        setIsCreating(false);
         toast.error("何らかのエラーが発生しました。");
         console.error(error);
         return;
@@ -51,5 +55,6 @@ export const useCreateNews = () => {
     contributorName,
     handleChangeContributorName,
     handleCreateNews,
+    isCreating,
   };
 };

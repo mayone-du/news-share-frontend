@@ -27,9 +27,12 @@ export const NewsList: React.VFC<Props> = (props) => {
                     <p className="text-xs text-blue-800 dark:text-blue-400">
                       {news?.node?.summary}
                     </p>
-                    <span className="block text-xs text-gray-500">
-                      {fixDateFormat(news?.node?.createdAt)}
-                    </span>
+                    <div className="flex justify-between items-center text-xs text-gray-500">
+                      <div>{fixDateFormat(news?.node?.createdAt)}</div>
+                      <div>
+                        {news?.node?.contributorName ? news.node.contributorName : "未設定"}
+                      </div>
+                    </div>
                   </div>
                 ) : (
                   <div className="px-4">{news?.node?.url}</div>

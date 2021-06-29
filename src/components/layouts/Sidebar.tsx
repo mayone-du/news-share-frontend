@@ -7,7 +7,7 @@ export const Sidebar: React.VFC = () => {
         <ul>
           <li>
             <Link href="/">
-              <a className="block py-2 text-center hover:bg-gray-200 border-b transition">
+              <a className="block py-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
                 <div className="flex items-center">
                   <span className="block mx-8">
                     <svg
@@ -32,22 +32,76 @@ export const Sidebar: React.VFC = () => {
           </li>
           <li>
             <Link href="/archive">
-              <a className="block py-2 text-center border-b">
-                <div>archive</div>
+              <a className="block py-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+                <div className="flex items-center">
+                  <span className="block mx-8">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+                      />
+                    </svg>
+                  </span>
+                  <span className="block">アーカイブ</span>
+                </div>
               </a>
             </Link>
           </li>
           <li>
             <Link href="/category">
-              <a className="block py-2 text-center border-b">
-                <div>category</div>
+              <a className="block py-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+                <div className="flex items-center">
+                  <span className="block mx-8">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                  </span>
+                  <span className="block">カテゴリー</span>
+                </div>
               </a>
             </Link>
           </li>
           <li>
             <Link href="/search">
-              <a className="block py-2 text-center border-b">
-                <div>search</div>
+              <a className="block py-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition">
+                <div className="flex items-center">
+                  <span className="block mx-8">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                  </span>
+                  <span className="block">検索</span>
+                </div>
               </a>
             </Link>
           </li>

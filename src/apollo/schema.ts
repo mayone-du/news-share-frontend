@@ -82,6 +82,7 @@ export type CreateNewsMutationInput = {
   selectCategoryId?: Maybe<Scalars['ID']>;
   url: Scalars['String'];
   tagIds?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  contributorName?: Maybe<Scalars['String']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
@@ -176,6 +177,7 @@ export type NewsNode = Node & {
   imagePath?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
   tags: TagNodeConnection;
+  contributorName?: Maybe<Scalars['String']>;
 };
 
 
@@ -421,6 +423,7 @@ export type UserNodeEdge = {
 
 export type CreateNewsMutationVariables = Exact<{
   url: Scalars['String'];
+  contributorName?: Maybe<Scalars['String']>;
   selectCategoryId?: Maybe<Scalars['ID']>;
   tagIds?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
 }>;
@@ -432,7 +435,7 @@ export type CreateNewsMutation = (
     { __typename?: 'CreateNewsMutationPayload' }
     & { news?: Maybe<(
       { __typename?: 'NewsNode' }
-      & Pick<NewsNode, 'id' | 'title' | 'url' | 'createdAt'>
+      & Pick<NewsNode, 'id'>
     )> }
   )> }
 );
@@ -505,7 +508,7 @@ export type GetAllNewsQuery = (
       { __typename?: 'NewsNodeEdge' }
       & { node?: Maybe<(
         { __typename?: 'NewsNode' }
-        & Pick<NewsNode, 'id' | 'url' | 'title' | 'summary' | 'imagePath' | 'createdAt'>
+        & Pick<NewsNode, 'id' | 'url' | 'title' | 'summary' | 'imagePath' | 'createdAt' | 'contributorName'>
         & { selectCategory?: Maybe<(
           { __typename?: 'CategoryNode' }
           & Pick<CategoryNode, 'id' | 'categoryName'>
@@ -535,7 +538,7 @@ export type GetTodayNewsQuery = (
       { __typename?: 'NewsNodeEdge' }
       & { node?: Maybe<(
         { __typename?: 'NewsNode' }
-        & Pick<NewsNode, 'id' | 'url' | 'title' | 'summary' | 'createdAt' | 'imagePath'>
+        & Pick<NewsNode, 'id' | 'url' | 'title' | 'summary' | 'createdAt' | 'imagePath' | 'contributorName'>
       )> }
     )>> }
   )> }
@@ -543,15 +546,12 @@ export type GetTodayNewsQuery = (
 
 
 export const CreateNewsDocument = gql`
-    mutation CreateNews($url: String!, $selectCategoryId: ID, $tagIds: [ID]) {
+    mutation CreateNews($url: String!, $contributorName: String, $selectCategoryId: ID, $tagIds: [ID]) {
   createNews(
-    input: {url: $url, selectCategoryId: $selectCategoryId, tagIds: $tagIds}
+    input: {url: $url, contributorName: $contributorName, selectCategoryId: $selectCategoryId, tagIds: $tagIds}
   ) {
     news {
       id
-      title
-      url
-      createdAt
     }
   }
 }
@@ -572,6 +572,7 @@ export type CreateNewsMutationFn = Apollo.MutationFunction<CreateNewsMutation, C
  * const [createNewsMutation, { data, loading, error }] = useCreateNewsMutation({
  *   variables: {
  *      url: // value for 'url'
+ *      contributorName: // value for 'contributorName'
  *      selectCategoryId: // value for 'selectCategoryId'
  *      tagIds: // value for 'tagIds'
  *   },
@@ -738,6 +739,7 @@ export const GetAllNewsDocument = gql`
         summary
         imagePath
         createdAt
+        contributorName
         selectCategory {
           id
           categoryName
@@ -793,6 +795,7 @@ export const GetTodayNewsDocument = gql`
         summary
         createdAt
         imagePath
+        contributorName
       }
     }
   }

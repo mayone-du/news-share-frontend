@@ -4,11 +4,16 @@ import { useCreateNewsMutation } from "src/apollo/schema";
 
 export const useCreateNews = () => {
   const [newsUrl, setNewsUrl] = useState("");
+  const [contributorName, setContributorName] = useState("");
   const [createNewsMutation] = useCreateNewsMutation();
 
   const handleChangeNewsUrl = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setNewsUrl(e.target.value);
   }, []);
+  const handleChangeContributorName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setContributorName(e.target.value);
+  }, []);
+
   const handleCreateNews = useCallback(
     async (e: React.ChangeEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -25,6 +30,7 @@ export const useCreateNews = () => {
         await createNewsMutation({
           variables: {
             url: newsUrl,
+            contributorName: contributorName,
           },
         });
         toast.success("作成されました。");
@@ -34,7 +40,13 @@ export const useCreateNews = () => {
         return;
       }
     },
-    [newsUrl, createNewsMutation],
+    [newsUrl, createNewsMutation, contributorName],
   );
-  return { newsUrl, handleChangeNewsUrl, handleCreateNews };
+  return {
+    newsUrl,
+    handleChangeNewsUrl,
+    contributorName,
+    handleChangeContributorName,
+    handleCreateNews,
+  };
 };

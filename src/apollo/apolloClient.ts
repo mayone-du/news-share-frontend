@@ -2,6 +2,8 @@ import type { NormalizedCacheObject } from "@apollo/client";
 import { ApolloClient } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
+import merge from "deepmerge";
+import isEqual from "lodash.isequal";
 import type { AppProps } from "next/dist/next-server/lib/router/router";
 import { parseCookies } from "nookies";
 import { cache } from "src/apollo/cache";
@@ -31,8 +33,33 @@ const createApolloClient = () => {
     cache: cache,
   });
 };
-export const initializeApollo = (_initialState = null) => {
+export const initializeApollo = (initialState: AppProps["pageProps"] = null) => {
   const _apolloClient = apolloClient ?? createApolloClient();
+
+  // ページにApollo Clientを使用したNext.jsのデータ取得メソッドがある場合、初期状態はここでハイドレーションされます。
+  if (initialState) {
+    // クライアント側のデータ取得中に読み込まれた既存のキャッシュを取得します。
+    const existingCache = _apolloClient.extract();
+
+    // 既存のキャッシュをgetStaticProps/getServerSidePropsから渡されたデータにマージします。
+    const data = merge(initialState, existingCache, {
+      // オブジェクトの平等性を利用して配列を結合する。
+      arrayMerge: (destinationArray, sourceArray) => {
+        return [
+          ...sourceArray,
+          ...destinationArray.filter((d) => {
+            return sourceArray.every((s) => {
+              return !isEqual(d, s);
+            });
+          }),
+        ];
+      },
+    });
+
+    // マージされたデータでキャッシュを復元する。
+    _apolloClient.cache.restore(data);
+  }
+
   // SSR時は新しいclientを作成
   if (typeof window === "undefined") return _apolloClient;
   // CSR時は同じクライアントを使い回す
@@ -40,7 +67,6 @@ export const initializeApollo = (_initialState = null) => {
 
   return _apolloClient;
 };
-
 export const addApolloState = (
   client: ApolloClient<NormalizedCacheObject>,
   pageProps: AppProps["pageProps"],

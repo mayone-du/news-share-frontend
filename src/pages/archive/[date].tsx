@@ -19,10 +19,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { data: allDate } = await apolloClient.query<GetAllDateQuery, GetAllDateQueryVariables>({
     query: GetAllNewsDocument,
   });
+  // すべての日付をY-m-d形式の文字列で配列に格納
   const allDays = allDate.allNews?.edges.map((news) => {
     return getDay(news?.node?.createdAt);
   });
 
+  // 配列から重複を削除
   const validateDays = Array.from(new Set(allDays));
   const paths = validateDays.map((day) => {
     return { params: { date: day } };
@@ -45,7 +47,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return getDay(news?.node?.createdAt) === context?.params?.date && news;
   });
 
-  // falesを削除
+  // falseを削除
   const specificData = defaultData?.filter(Boolean);
 
   return addApolloState(apolloClient, {

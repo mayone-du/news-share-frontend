@@ -1,0 +1,75 @@
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { useRouter } from "next/dist/client/router";
+import { addApolloState, initializeApollo } from "src/apollo/apolloClient";
+import type {
+  GetAllDateQuery,
+  GetAllDateQueryVariables,
+  GetAllNewsQuery,
+  GetAllNewsQueryVariables,
+} from "src/apollo/schema";
+import { GetAllNewsDocument } from "src/apollo/schema";
+import { Headline2 } from "src/components/Headline2";
+import { Layout } from "src/components/layouts/Layout";
+import { NewsList } from "src/components/news/NewsList";
+import { getDay } from "src/libs/getDay";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const apolloClient = initializeApollo(null);
+  const { data: allDate } = await apolloClient.query<GetAllDateQuery, GetAllDateQueryVariables>({
+    query: GetAllNewsDocument,
+  });
+  const allDays = allDate.allNews?.edges.map((news) => {
+    return getDay(news?.node?.createdAt);
+  });
+
+  const validateDays = Array.from(new Set(allDays));
+  const paths = validateDays.map((day) => {
+    return { params: { date: day } };
+  });
+
+  return { paths: paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const apolloClient = initializeApollo(null);
+  const { data: allNewsData } = await apolloClient.query<GetAllNewsQuery, GetAllNewsQueryVariables>(
+    {
+      query: GetAllNewsDocument,
+    },
+  );
+
+  const defaultData = allNewsData.allNews?.edges.map((news) => {
+    return getDay(news?.node?.createdAt) === context?.params?.date && news;
+  });
+
+  const specificData = defaultData?.filter(Boolean);
+
+  return addApolloState(apolloClient, {
+    props: {
+      specificData,
+      fallback: false,
+    },
+    revalidate: 3, // 3seconds
+  });
+};
+
+type Props<T> = {
+  specificData: T;
+};
+const ArchiveAllNewsPage: NextPage<Props<GetAllNewsQuery>> = (props) => {
+  const router = useRouter();
+  const currentPath = router.asPath.replace("/archive/", "");
+  return (
+    <Layout
+      metaTitle={`${currentPath}のアーカイブ | Qin 夜活ニュースシェア`}
+      currentPagePath="/archive"
+    >
+      <div>
+        <Headline2 text={`${currentPath}のアーカイブ`} />
+        <NewsList data={{ edges: props.specificData }} />
+      </div>
+    </Layout>
+  );
+};
+
+export default ArchiveAllNewsPage;

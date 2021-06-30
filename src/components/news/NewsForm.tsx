@@ -1,4 +1,4 @@
-import { NewsCreating } from "src/components/NewsCreating";
+import { NewsCreating } from "src/components/news/NewsCreating";
 import { useCreateNews } from "src/libs/hooks/useCreateNews";
 
 export const NewsForm: React.VFC = () => {
@@ -22,7 +22,7 @@ export const NewsForm: React.VFC = () => {
       <input
         className="block p-2 mx-auto w-3/4 rounded-none border focus:outline-none"
         type="text"
-        placeholder="ニックネーム"
+        placeholder="ニックネーム（匿名可）"
         value={contributorName}
         onChange={handleChangeContributorName}
       />

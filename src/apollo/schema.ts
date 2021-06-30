@@ -440,6 +440,23 @@ export type CreateNewsMutation = (
   )> }
 );
 
+export type GetAllDateQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllDateQuery = (
+  { __typename?: 'Query' }
+  & { allNews?: Maybe<(
+    { __typename?: 'NewsNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'NewsNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'NewsNode' }
+        & Pick<NewsNode, 'id' | 'createdAt'>
+      )> }
+    )>> }
+  )> }
+);
+
 export type GetAllNewsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -547,6 +564,45 @@ export function useCreateNewsMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateNewsMutationHookResult = ReturnType<typeof useCreateNewsMutation>;
 export type CreateNewsMutationResult = Apollo.MutationResult<CreateNewsMutation>;
 export type CreateNewsMutationOptions = Apollo.BaseMutationOptions<CreateNewsMutation, CreateNewsMutationVariables>;
+export const GetAllDateDocument = gql`
+    query GetAllDate {
+  allNews {
+    edges {
+      node {
+        id
+        createdAt
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllDateQuery__
+ *
+ * To run a query within a React component, call `useGetAllDateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllDateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllDateQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllDateQuery(baseOptions?: Apollo.QueryHookOptions<GetAllDateQuery, GetAllDateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllDateQuery, GetAllDateQueryVariables>(GetAllDateDocument, options);
+      }
+export function useGetAllDateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllDateQuery, GetAllDateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllDateQuery, GetAllDateQueryVariables>(GetAllDateDocument, options);
+        }
+export type GetAllDateQueryHookResult = ReturnType<typeof useGetAllDateQuery>;
+export type GetAllDateLazyQueryHookResult = ReturnType<typeof useGetAllDateLazyQuery>;
+export type GetAllDateQueryResult = Apollo.QueryResult<GetAllDateQuery, GetAllDateQueryVariables>;
 export const GetAllNewsDocument = gql`
     query GetAllNews {
   allNews {

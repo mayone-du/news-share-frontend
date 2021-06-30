@@ -4,7 +4,7 @@ import type { GetAllNewsQuery, GetAllNewsQueryVariables } from "src/apollo/schem
 import { GetAllNewsDocument } from "src/apollo/schema";
 import { Headline2 } from "src/components/Headline2";
 import { Layout } from "src/components/layouts/Layout";
-import { NewsList } from "src/components/NewsList";
+import { NewsList } from "src/components/news/NewsList";
 
 export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo(null);
@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return addApolloState(apolloClient, {
     props: {
       allNewsData,
-      // fallback: false,
+      fallback: false,
     },
     revalidate: 3, // 3seconds
   });
@@ -26,15 +26,16 @@ export const getStaticProps: GetStaticProps = async () => {
 type Props<T> = {
   allNewsData: T;
 };
-const ArchivePage: NextPage<Props<GetAllNewsQuery>> = (props) => {
+const ArchiveAllNewsPage: NextPage<Props<GetAllNewsQuery>> = (props) => {
   return (
     <Layout metaTitle="アーカイブ | Qin 夜活ニュースシェア" currentPagePath="/archive">
       <div>
         <Headline2 text="アーカイブ" />
+
         <NewsList data={props.allNewsData.allNews} />
       </div>
     </Layout>
   );
 };
 
-export default ArchivePage;
+export default ArchiveAllNewsPage;

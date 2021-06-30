@@ -6,9 +6,9 @@ import { useGetTodayNewsQuery } from "src/apollo/schema";
 // import { GetTodayNewsDocument } from "src/apollo/schema";
 import { Headline2 } from "src/components/Headline2";
 import { Layout } from "src/components/layouts/Layout";
-import { NewsForm } from "src/components/NewsForm";
-import { NewsList } from "src/components/NewsList";
-import { NewsLoading } from "src/components/NewsLoading";
+import { NewsForm } from "src/components/news/NewsForm";
+import { NewsList } from "src/components/news/NewsList";
+import { NewsLoading } from "src/components/news/NewsLoading";
 // export const getStaticProps: GetStaticProps = async () => {
 //   const apolloClient = initializeApollo(null);
 //   const { data: todayNewsData } = await apolloClient.query<

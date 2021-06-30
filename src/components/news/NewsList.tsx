@@ -23,7 +23,9 @@ export const NewsList: React.VFC<Props> = (props) => {
                 />
                 {news?.node ? (
                   <div className="px-4 w-full">
-                    <h3 className="text-sm md:text-base font-bold">{news.node.title}</h3>
+                    <h3 className="text-sm md:text-base font-bold">
+                      {news.node.title ? news.node.title : news.node.url}
+                    </h3>
                     <p className="text-xs text-blue-800 dark:text-blue-400">
                       {news.node.summary ? news.node.summary : "概要はありません。"}
                     </p>

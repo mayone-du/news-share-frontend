@@ -3,7 +3,8 @@ import { useRouter } from "next/dist/client/router";
 import { useSearchNewsQuery } from "src/apollo/schema";
 import { Headline2 } from "src/components/Headline2";
 import { Layout } from "src/components/layouts/Layout";
-import { NewsList } from "src/components/NewsList";
+import { NewsList } from "src/components/news/NewsList";
+import { NewsLoading } from "src/components/news/NewsLoading";
 
 const ResultsPage: NextPage = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const ResultsPage: NextPage = () => {
     >
       <div>
         <Headline2 text={`"${searchKeyword}"を含む検索結果`} />
-        {isLoading && <div>loading</div>}
+        {isLoading && <NewsLoading />}
         {data && <NewsList data={data?.allNews} />}
       </div>
     </Layout>

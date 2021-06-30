@@ -47,7 +47,6 @@ const Index: NextPage = () => {
         <div className="md:w-1/2">
           <div className="md:border-l">
             <Headline2 text="今日のニュース" />
-            {/* <NewsList data={props.todayNewsData.todayNews} /> */}
             {data?.todayNews && <NewsList data={data?.todayNews} />}
             {isLoading && <NewsLoading />}
           </div>

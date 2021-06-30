@@ -13,6 +13,7 @@ import { Layout } from "src/components/layouts/Layout";
 import { NewsList } from "src/components/news/NewsList";
 import { getDay } from "src/libs/getDay";
 
+// すべての日付（paths）を取得
 export const getStaticPaths: GetStaticPaths = async () => {
   const apolloClient = initializeApollo(null);
   const { data: allDate } = await apolloClient.query<GetAllDateQuery, GetAllDateQueryVariables>({
@@ -30,6 +31,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: paths, fallback: false };
 };
 
+// 日付ごとのデータを取得
 export const getStaticProps: GetStaticProps = async (context) => {
   const apolloClient = initializeApollo(null);
   const { data: allNewsData } = await apolloClient.query<GetAllNewsQuery, GetAllNewsQueryVariables>(
@@ -38,10 +40,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
     },
   );
 
+  // 指定された日付と合うものだけオブジェクトを返し、それ以外はfalseを返す
   const defaultData = allNewsData.allNews?.edges.map((news) => {
     return getDay(news?.node?.createdAt) === context?.params?.date && news;
   });
 
+  // falesを削除
   const specificData = defaultData?.filter(Boolean);
 
   return addApolloState(apolloClient, {

@@ -2,9 +2,8 @@ import type { NormalizedCacheObject } from "@apollo/client";
 import { ApolloClient } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
-import type { NextPageContext } from "next";
 import type { AppProps } from "next/dist/next-server/lib/router/router";
-import nookies, { parseCookies } from "nookies";
+import { parseCookies } from "nookies";
 import { cache } from "src/apollo/cache";
 import { GRAPHQL_API_ENDPOINT } from "src/utils/API_ENDPOINTS";
 
@@ -32,14 +31,10 @@ const createApolloClient = () => {
     cache: cache,
   });
 };
-export const initializeApollo = (_initialState = null, context?: NextPageContext) => {
-  const cookies = nookies.get(context);
-
+export const initializeApollo = (_initialState = null) => {
   const _apolloClient = apolloClient ?? createApolloClient();
   // SSR時は新しいclientを作成
   if (typeof window === "undefined") return _apolloClient;
-  // accessTokenがないときも新しいclientを作成
-  if (!cookies.accessToken) return _apolloClient;
   // CSR時は同じクライアントを使い回す
   if (!apolloClient) apolloClient = _apolloClient;
 

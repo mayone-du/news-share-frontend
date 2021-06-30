@@ -35,12 +35,12 @@ const ArchivePage: NextPage<Props<GetAllDateQuery>> = (props) => {
       <div>
         <Headline2 text="アーカイブ" />
 
-        <ul>
+        <ul className="p-4">
           {validateDays.map((day, index) => {
             return (
-              <li key={index}>
+              <li key={index} className={`${index === 0 && "border-t"}`}>
                 <Link href={`/archive/${day}`}>
-                  <a className="block text-blue-600 border-b">{day}</a>
+                  <a className="block py-2 px-4 text-blue-600 border-b">{day}</a>
                 </Link>
               </li>
             );

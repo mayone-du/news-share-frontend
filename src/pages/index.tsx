@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-// import { useEffect } from "react";
+import { useCallback, useState } from "react";
 import { useGetTodayNewsQuery } from "src/apollo/schema";
 // import type { GetStaticProps, NextPage } from "next";
 // import { addApolloState, initializeApollo } from "src/apollo/apolloClient";
@@ -11,6 +11,7 @@ import { NewsForm } from "src/components/news/NewsForm";
 import { NewsList } from "src/components/news/NewsList";
 import { NewsLoading } from "src/components/news/NewsLoading";
 import { useSubmitSlack } from "src/libs/hooks/useSubmitSlack";
+import { SLACK_PASSWORD } from "src/utils/PASSWORD";
 // export const getStaticProps: GetStaticProps = async () => {
 //   const apolloClient = initializeApollo(null);
 //   const { data: todayNewsData } = await apolloClient.query<
@@ -39,9 +40,11 @@ const Index: NextPage = () => {
     pollInterval: process.env.NODE_ENV === "development" ? 1000 * 60 * 60 : 1000,
   });
 
-  // useEffect(() => {
+  const [password, setPassword] = useState("");
 
-  // }, [data])
+  const handleChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  }, []);
 
   const { handleSubmitSlack } = useSubmitSlack();
 
@@ -71,9 +74,21 @@ ${todayNews}`,
         <div className="md:w-1/2">
           <Headline2 text="ニュースをシェア" />
           <NewsForm />
-          <button className="block py-2 px-4 mx-auto rounded-3xl border" onClick={handleClickSlack}>
-            Slackに送信する
-          </button>
+          <input
+            type="password"
+            value={password}
+            onChange={handleChangePassword}
+            placeholder="国王のみぞ知るパスワード"
+            className="block p-2 my-2 mx-auto w-3/4 border focus:outline-none"
+          />
+          {password === SLACK_PASSWORD && (
+            <button
+              className="block py-2 px-4 mx-auto rounded-3xl border"
+              onClick={handleClickSlack}
+            >
+              Slackに送信する
+            </button>
+          )}
         </div>
         <div className="md:w-1/2">
           <div className="md:border-l">

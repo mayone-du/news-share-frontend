@@ -66,6 +66,7 @@ ${todayNews}`,
       ],
     };
     handleSubmitSlack(payload);
+    setPassword("");
   };
 
   return (

@@ -34,12 +34,12 @@ const ArchivePage: NextPage<Props<GetAllDateQuery>> = (props) => {
   return (
     <Layout metaTitle="アーカイブ | Qin 夜活ニュースシェア" currentPagePath="/archive">
       <div>
-        <p className="p-2 my-2 text-lg text-center text-blue-600">
+        <Headline2 text="アーカイブ" />
+        <p className="pb-2 mb-2 text-lg text-center text-blue-600">
           <Link href="/archive/all-news">
             <a>すべてのニュース一覧</a>
           </Link>
         </p>
-        <Headline2 text="アーカイブ" />
         <ul className="p-4">
           {validateDays.map((day, index) => {
             return (

@@ -84,7 +84,7 @@ ${todayNews}`,
           />
           {password === SLACK_PASSWORD && (
             <button
-              className="block py-2 px-4 mx-auto rounded-3xl border"
+              className="block py-2 px-4 my-2 mx-auto rounded-3xl border"
               onClick={handleClickSlack}
             >
               Slackに送信する

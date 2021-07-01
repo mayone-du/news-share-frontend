@@ -1,10 +1,6 @@
 import type { NextPage } from "next";
 import { useCallback, useState } from "react";
 import { useGetTodayNewsQuery } from "src/apollo/schema";
-// import type { GetStaticProps, NextPage } from "next";
-// import { addApolloState, initializeApollo } from "src/apollo/apolloClient";
-// import type { GetTodayNewsQuery, GetTodayNewsQueryVariables } from "src/apollo/schema";
-// import { GetTodayNewsDocument } from "src/apollo/schema";
 import { Headline2 } from "src/components/Headline2";
 import { Layout } from "src/components/layouts/Layout";
 import { NewsForm } from "src/components/news/NewsForm";
@@ -12,28 +8,7 @@ import { NewsList } from "src/components/news/NewsList";
 import { NewsLoading } from "src/components/news/NewsLoading";
 import { useSubmitSlack } from "src/libs/hooks/useSubmitSlack";
 import { SLACK_PASSWORD } from "src/utils/PASSWORD";
-// export const getStaticProps: GetStaticProps = async () => {
-//   const apolloClient = initializeApollo(null);
-//   const { data: todayNewsData } = await apolloClient.query<
-//     GetTodayNewsQuery,
-//     GetTodayNewsQueryVariables
-//   >({
-//     query: GetTodayNewsDocument,
-//   });
 
-//   return addApolloState(apolloClient, {
-//     props: {
-//       todayNewsData,
-//       // fallback: false,
-//     },
-//     revalidate: 3, // 3seconds
-//   });
-// };
-
-// type Props<T> = {
-//   todayNewsData: T;
-// };
-// const Index: NextPage<Props<GetTodayNewsQuery>> = (props) => {
 const Index: NextPage = () => {
   // 開発環境では1時間、本番環境では1秒ごとにポーリング
   const { data, loading: isLoading } = useGetTodayNewsQuery({
@@ -66,7 +41,6 @@ const Index: NextPage = () => {
               dayOfWeekStrJP[today.getDay()]
             }）のニュース*\n
 ${todayNews}`,
-            // ${todayNews?.toString().replace(",", "")}`,
           },
         },
       ],

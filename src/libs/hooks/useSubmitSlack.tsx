@@ -1,8 +1,9 @@
+import { useCallback } from "react";
 import toast from "react-hot-toast";
 import { SLACK_API_ENDPOINT } from "src/utils/API_ENDPOINTS";
 
 export const useSubmitSlack = () => {
-  const handleSubmitSlack = async (payload: any) => {
+  const handleSubmitSlack = useCallback(async (payload: any) => {
     try {
       await fetch(SLACK_API_ENDPOINT, {
         method: "POST",
@@ -13,6 +14,6 @@ export const useSubmitSlack = () => {
       toast.error("エラーが発生しました。");
       console.error(error);
     }
-  };
+  }, []);
   return { handleSubmitSlack };
 };

@@ -48,26 +48,32 @@ const Index: NextPage = () => {
 
   const { handleSubmitSlack } = useSubmitSlack();
 
-  const handleClickSlack = () => {
+  const handleClickSlack = useCallback(() => {
     const todayNews = data?.todayNews?.edges.map((news) => {
-      return `- ${news?.node?.title ? news.node.title : "タイトルなし"}[${news?.node?.url}]\n`;
+      return `- <${news?.node?.url}|${news?.node?.title}>\n`;
     });
 
+    const today = new Date();
+    const dayOfWeekStrJP = ["日", "月", "火", "水", "木", "金", "土"];
     const payload = {
       blocks: [
         {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `# 今日のニュース \n
+            text: `
+*${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}（${
+              dayOfWeekStrJP[today.getDay()]
+            }）のニュース*\n
 ${todayNews}`,
+            // ${todayNews?.toString().replace(",", "")}`,
           },
         },
       ],
     };
     handleSubmitSlack(payload);
     setPassword("");
-  };
+  }, [data?.todayNews, handleSubmitSlack]);
 
   return (
     <Layout metaTitle="Qin 夜活ニュースシェア" currentPagePath="/">

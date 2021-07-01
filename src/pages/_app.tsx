@@ -24,7 +24,7 @@ const App = (props: AppProps) => {
   return (
     <div>
       <ApolloProvider client={apolloClient}>
-        <ThemeProvider attribute="class">
+        <ThemeProvider defaultTheme="light" attribute="class">
           <props.Component {...props.pageProps} />
           <Toaster toastOptions={{ duration: 2500 }} />
         </ThemeProvider>

@@ -5,12 +5,12 @@ export const Header: React.VFC = () => {
   return (
     <div>
       <header className="py-2 md:py-4 px-4 md:px-20 border-b">
-        <div className="flex justify-between items-center md:m-2">
+        <h1 className="flex justify-between items-center md:m-2">
           <Link href="/">
             <a className="md:text-xl font-bold">Qin&nbsp;夜活ニュースシェア</a>
           </Link>
           <ThemeChanger />
-        </div>
+        </h1>
       </header>
     </div>
   );

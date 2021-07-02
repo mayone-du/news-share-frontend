@@ -124,6 +124,35 @@ export const Sidebar: React.VFC<Props> = (props) => {
               </a>
             </Link>
           </li>
+          {/* <li>
+            <Link href="/README">
+              <a
+                className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
+                  props.currentPagePath === "/README" ? "bg-blue-200 dark:bg-blue-700" : null
+                }`}
+              >
+                <div className="flex items-center">
+                  <span className="block px-4 md:px-0 md:mx-8">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                  </span>
+                  <span className="hidden md:block">使い方</span>
+                </div>
+              </a>
+            </Link>
+          </li> */}
         </ul>
       </nav>
     </aside>

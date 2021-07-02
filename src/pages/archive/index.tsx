@@ -27,10 +27,24 @@ type Props<T> = {
   allDate: T;
 };
 const ArchivePage: NextPage<Props<GetAllDateQuery>> = (props) => {
-  const allDays = props.allDate.allNews?.edges.map((news) => {
-    return getDay(news?.node?.createdAt);
-  });
+  const allDays = props.allDate.allNews
+    ? props.allDate.allNews.edges.map((news) => {
+        return getDay(news?.node?.createdAt);
+      })
+    : "";
+
+  // 日付ごとの件数を取得
+  // TODO: any型の修正
+  const dayCount: any = {};
+  for (let i = 0; i < allDays.length; i++) {
+    const day = allDays[i];
+    dayCount[day] = (dayCount[day] || 0) + 1;
+  }
+
+  // 重複する値を削除
   const validateDays = Array.from(new Set(allDays));
+
+  const dayOfTheWeek = ["日", "月", "火", "水", "木", "金", "土"];
   return (
     <Layout metaTitle="アーカイブ | Qin 夜活ニュースシェア" currentPagePath="/archive">
       <div>
@@ -45,7 +59,14 @@ const ArchivePage: NextPage<Props<GetAllDateQuery>> = (props) => {
             return (
               <li key={index} className={`${index === 0 && "border-t"}`}>
                 <Link href={`/archive/${day}`}>
-                  <a className="block py-2 px-4 text-blue-600 border-b">{day}</a>
+                  <a className="flex items-center p-2 w-full text-blue-600 border-b">
+                    <div className="px-2">
+                      {day} （{dayOfTheWeek[new Date(day).getDay()]}）
+                    </div>
+                    <div className="px-2">
+                      <span className="font-bold">{dayCount[day]}</span>件
+                    </div>
+                  </a>
                 </Link>
               </li>
             );

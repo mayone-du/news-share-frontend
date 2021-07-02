@@ -25,26 +25,29 @@ const Index: NextPage = () => {
 
   const handleClickSlack = useCallback(() => {
     const todayNews = data?.todayNews?.edges.map((news) => {
-      return `- <${news?.node?.url}|${news?.node?.title}>\n`;
+      return `<${news?.node?.url}|${news?.node?.title}>`;
     });
 
     const today = new Date();
-    const dayOfWeekStrJP = ["日", "月", "火", "水", "木", "金", "土"];
-    const payload = {
+    const dayOfTheWeek = ["日", "月", "火", "水", "木", "金", "土"];
+    const todaySlackTitle = `*${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}（${
+      dayOfTheWeek[today.getDay()]
+    }）のニュース*`;
+
+    const payload: any = {
       blocks: [
         {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `
-*${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}（${
-              dayOfWeekStrJP[today.getDay()]
-            }）のニュース*\n
-${todayNews}`,
+            text: todaySlackTitle,
           },
         },
       ],
     };
+    todayNews?.forEach((news) => {
+      payload.blocks.push({ type: "section", text: { type: "mrkdwn", text: `*・* ${news}` } });
+    });
     handleSubmitSlack(payload);
     setPassword("");
   }, [data?.todayNews, handleSubmitSlack]);
@@ -62,6 +65,7 @@ ${todayNews}`,
             placeholder="国王のみぞ知るパスワード"
             className="block p-2 my-2 mx-auto w-3/4 border focus:outline-none"
           />
+          {/* パスワードが一致する場合のみslack送信を許可 */}
           {password === SLACK_PASSWORD && (
             <button
               className="block py-2 px-4 my-2 mx-auto rounded-3xl border"

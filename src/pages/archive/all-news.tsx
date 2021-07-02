@@ -17,7 +17,6 @@ export const getStaticProps: GetStaticProps = async () => {
   return addApolloState(apolloClient, {
     props: {
       allNewsData,
-      fallback: false,
     },
     revalidate: 3, // 3seconds
   });

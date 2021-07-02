@@ -13,8 +13,8 @@ export const Layout: React.FC<Props> = (props) => {
     <div>
       <Head>
         <title>{props.metaTitle}</title>
-        <meta name="description" content="description" />
-        <meta property="og:url" content="https://" />
+        <meta name="description" content="IT_KINGDOM専用 夜活ニュースシェアアプリです。" />
+        <meta property="og:url" content="https://qin-news-share.vercel.app/" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Qin 夜活ニュースシェア" />
         <meta
@@ -29,7 +29,11 @@ export const Layout: React.FC<Props> = (props) => {
         <meta name="twitter:site" content="@mayo1201blog" />
 
         {/* PWA */}
-        <link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png" />
+        <link
+          rel="apple-touch-icon"
+          type="image/png"
+          href="/pwa/icons/apple-touch-icon-180x180.png"
+        />
         <link rel="icon" sizes="512x512" href="/pwa/icons/icon-512x512.png" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/pwa/manifest.json" />
@@ -42,12 +46,16 @@ export const Layout: React.FC<Props> = (props) => {
         {/* Safari */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="#000" />
-        <meta name="apple-mobile-web-app-title" content="myapp" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+        <meta name="apple-mobile-web-app-title" content="Qin 夜活ニュースシェア" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/pwa/icons/apple-touch-icon-180x180.png"
+        />
         {/* 一般 */}
-        <meta name="application-name" content="myapp" />
+        <meta name="application-name" content="Qin 夜活ニュースシェア" />
         <meta name="theme-color" content="#000" />
-        <meta name="description" content="this is myapp" />
+        <meta name="description" content="this is Qin 夜活ニュースシェア" />
         <link rel="icon" sizes="512x512" href="/pwa/icons/icon-512x512.png" />
         <link rel="icon" href="/images/favicon.ico" />
         <link rel="manifest" href="/pwa/manifest.json" />

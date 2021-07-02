@@ -1,5 +1,7 @@
 import type { NextPage } from "next";
+import party from "party-js";
 import { useCallback, useState } from "react";
+import toast from "react-hot-toast";
 import { useGetTodayNewsQuery } from "src/apollo/schema";
 import { Headline2 } from "src/components/Headline2";
 import { Layout } from "src/components/layouts/Layout";
@@ -23,34 +25,56 @@ const Index: NextPage = () => {
 
   const { handleSubmitSlack } = useSubmitSlack();
 
-  const handleClickSlack = useCallback(() => {
-    const todayNews = data?.todayNews?.edges.map((news) => {
-      return `<${news?.node?.url}|${news?.node?.title}>`;
-    });
+  const handleClickSlack = useCallback(
+    (e: React.ChangeEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (password !== SLACK_PASSWORD) {
+        toast.error("パスワードが違います");
+        return;
+      }
+      const today = new Date();
+      const dayOfTheWeek = ["日", "月", "火", "水", "木", "金", "土"];
+      const todaySlackTitle = `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}（${
+        dayOfTheWeek[today.getDay()]
+      }）のニュース`;
 
-    const today = new Date();
-    const dayOfTheWeek = ["日", "月", "火", "水", "木", "金", "土"];
-    const todaySlackTitle = `*${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}（${
-      dayOfTheWeek[today.getDay()]
-    }）のニュース*`;
+      const payload: any = {
+        blocks: [
+          {
+            type: "header",
+            text: {
+              type: "plain_text",
+              text: todaySlackTitle,
+            },
+          },
+        ],
+      };
 
-    const payload: any = {
-      blocks: [
-        {
+      data?.todayNews?.edges.forEach((news) => {
+        payload.blocks.push({
           type: "section",
           text: {
             type: "mrkdwn",
-            text: todaySlackTitle,
+            text: `*<${news?.node?.url} | ${news?.node?.title}>*\n${news?.node?.summary}`,
           },
-        },
-      ],
-    };
-    todayNews?.forEach((news) => {
-      payload.blocks.push({ type: "section", text: { type: "mrkdwn", text: `*・* ${news}` } });
-    });
-    handleSubmitSlack(payload);
-    setPassword("");
-  }, [data?.todayNews, handleSubmitSlack]);
+          accessory: {
+            type: "image",
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            image_url: news?.node?.imagePath
+              ? news.node.imagePath
+              : "https://via.placeholder.com/150",
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            alt_text: news?.node?.title,
+          },
+        });
+      });
+
+      handleSubmitSlack(payload);
+      setPassword("");
+      party.sparkles(e.target);
+    },
+    [data?.todayNews, handleSubmitSlack, password],
+  );
 
   return (
     <Layout metaTitle="Qin 夜活ニュースシェア" currentPagePath="/">
@@ -58,25 +82,26 @@ const Index: NextPage = () => {
         <div className="md:w-1/2">
           <Headline2 text="ニュースをシェア" />
           <NewsForm />
-          <input
-            type="password"
-            value={password}
-            onChange={handleChangePassword}
-            placeholder="国王のみぞ知るパスワード"
-            className="block p-2 my-2 mx-auto w-3/4 border focus:outline-none"
-          />
-          {/* パスワードが一致する場合のみslack送信を許可 */}
-          {password === SLACK_PASSWORD && (
+          <form onSubmit={handleClickSlack}>
+            <input
+              type="password"
+              value={password}
+              onChange={handleChangePassword}
+              placeholder="国王のみぞ知るパスワード"
+              className="block p-2 my-2 mx-auto w-3/4 border focus:outline-none"
+            />
+            {/* パスワードが一致する場合のみslack送信を許可 */}
             <button
-              className="block py-2 px-4 my-2 mx-auto rounded-3xl border"
-              onClick={handleClickSlack}
+              type="submit"
+              disabled={password === SLACK_PASSWORD ? false : true}
+              className="block py-2 px-4 my-2 mx-auto disabled:line-through disabled:bg-gray-400 rounded-3xl border disabled:cursor-not-allowed"
             >
               Slackに送信する
             </button>
-          )}
+          </form>
         </div>
-        <div className="md:w-1/2">
-          <div className="md:border-l">
+        <div className="md:w-1/2 md:border-l">
+          <div>
             <Headline2 text="今日のニュース" />
             {data?.todayNews && <NewsList data={data?.todayNews} />}
             {isLoading && <NewsLoading />}

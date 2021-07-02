@@ -38,7 +38,7 @@ export const useCreateNews = () => {
         });
         setIsCreating(false);
         party.confetti(e.target);
-        toast.success("作成されました。");
+        toast.success("シェアされました！");
         setNewsUrl("");
       } catch (error) {
         setIsCreating(false);

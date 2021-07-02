@@ -9,7 +9,7 @@ export const useSubmitSlack = () => {
         method: "POST",
         body: JSON.stringify(payload),
       });
-      toast.success("今日のニュースがSlackに送信されました。");
+      toast.success("Slackに送信されました。今日もお疲れさまです🥳");
     } catch (error) {
       toast.error("エラーが発生しました。");
       console.error(error);

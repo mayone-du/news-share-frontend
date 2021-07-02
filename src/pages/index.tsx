@@ -68,6 +68,9 @@ const Index: NextPage = () => {
           },
         });
       });
+      payload.blocks.push({
+        type: "divider",
+      });
 
       handleSubmitSlack(payload);
       setPassword("");

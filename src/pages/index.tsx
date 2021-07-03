@@ -1,7 +1,9 @@
+import { useReactiveVar } from "@apollo/client";
 import type { NextPage } from "next";
 import party from "party-js";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import toast from "react-hot-toast";
+import { slackPasswordVar } from "src/apollo/cache";
 import { useGetTodayNewsQuery } from "src/apollo/schema";
 import { Headline2 } from "src/components/Headline2";
 import { Layout } from "src/components/layouts/Layout";
@@ -17,10 +19,10 @@ const Index: NextPage = () => {
     pollInterval: process.env.NODE_ENV === "development" ? 1000 * 60 * 60 : 1000,
   });
 
-  const [password, setPassword] = useState("");
+  const slackPassword = useReactiveVar(slackPasswordVar);
 
   const handleChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+    slackPasswordVar(e.target.value);
   }, []);
 
   const { handleSubmitSlack } = useSubmitSlack();
@@ -28,7 +30,7 @@ const Index: NextPage = () => {
   const handleClickSlack = useCallback(
     (e: React.ChangeEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (password !== SLACK_PASSWORD) {
+      if (slackPassword !== SLACK_PASSWORD) {
         toast.error("パスワードが違います");
         return;
       }
@@ -73,10 +75,10 @@ const Index: NextPage = () => {
       });
 
       handleSubmitSlack(payload);
-      setPassword("");
+      slackPasswordVar("");
       party.sparkles(e.target);
     },
-    [data?.todayNews, handleSubmitSlack, password],
+    [data?.todayNews, handleSubmitSlack, slackPassword],
   );
 
   return (
@@ -88,7 +90,7 @@ const Index: NextPage = () => {
           <form onSubmit={handleClickSlack}>
             <input
               type="password"
-              value={password}
+              value={slackPassword}
               onChange={handleChangePassword}
               placeholder="国王のみぞ知るパスワード"
               className="block p-2 my-2 mx-auto w-3/4 border focus:outline-none"
@@ -96,7 +98,7 @@ const Index: NextPage = () => {
             {/* パスワードが一致する場合のみslack送信を許可 */}
             <button
               type="submit"
-              disabled={password === SLACK_PASSWORD ? false : true}
+              disabled={slackPassword === SLACK_PASSWORD ? false : true}
               className="block py-2 px-4 my-2 mx-auto disabled:line-through disabled:bg-gray-400 rounded-3xl border disabled:cursor-not-allowed"
             >
               Slackに送信する

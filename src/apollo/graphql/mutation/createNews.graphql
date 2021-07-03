@@ -1,7 +1,14 @@
-mutation CreateNews($url: String!, $contributorName: String, $selectCategoryId: ID, $tagIds: [ID]) {
+mutation CreateNews(
+  $url: String!
+  $createdAt: Int!
+  $contributorName: String
+  $selectCategoryId: ID
+  $tagIds: [ID]
+) {
   createNews(
     input: {
       url: $url
+      createdAt: $createdAt
       contributorName: $contributorName
       selectCategoryId: $selectCategoryId
       tagIds: $tagIds

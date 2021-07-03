@@ -1,5 +1,5 @@
 import { NewsCreating } from "src/components/news/NewsCreating";
-import { useCreateNews } from "src/libs/hooks/useCreateNews";
+import { useCreateNews } from "src/libs/hooks/news/useCreateNews";
 
 export const NewsForm: React.VFC = () => {
   const {

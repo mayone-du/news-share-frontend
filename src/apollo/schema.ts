@@ -83,6 +83,7 @@ export type CreateNewsMutationInput = {
   url: Scalars['String'];
   tagIds?: Maybe<Array<Maybe<Scalars['ID']>>>;
   contributorName?: Maybe<Scalars['String']>;
+  createdAt: Scalars['Int'];
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
@@ -124,6 +125,7 @@ export type Mutation = {
   createCategory?: Maybe<CreateCategoryMutationPayload>;
   createTag?: Maybe<CreateTagMutationPayload>;
   createNews?: Maybe<CreateNewsMutationPayload>;
+  updateNews?: Maybe<UpdateNewsMutationPayload>;
   /** Obtain JSON Web Token mutation */
   tokenAuth?: Maybe<ObtainJsonWebToken>;
   refreshToken?: Maybe<Refresh>;
@@ -148,6 +150,11 @@ export type MutationCreateTagArgs = {
 
 export type MutationCreateNewsArgs = {
   input: CreateNewsMutationInput;
+};
+
+
+export type MutationUpdateNewsArgs = {
+  input: UpdateNewsMutationInput;
 };
 
 
@@ -389,6 +396,18 @@ export type TagNodeEdge = {
   cursor: Scalars['String'];
 };
 
+export type UpdateNewsMutationInput = {
+  id: Scalars['ID'];
+  createdAt: Scalars['Int'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateNewsMutationPayload = {
+  __typename?: 'UpdateNewsMutationPayload';
+  news?: Maybe<NewsNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type UserNode = Node & {
   __typename?: 'UserNode';
   /** The ID of the object. */
@@ -423,6 +442,7 @@ export type UserNodeEdge = {
 
 export type CreateNewsMutationVariables = Exact<{
   url: Scalars['String'];
+  createdAt: Scalars['Int'];
   contributorName?: Maybe<Scalars['String']>;
   selectCategoryId?: Maybe<Scalars['ID']>;
   tagIds?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
@@ -433,6 +453,23 @@ export type CreateNewsMutation = (
   { __typename?: 'Mutation' }
   & { createNews?: Maybe<(
     { __typename?: 'CreateNewsMutationPayload' }
+    & { news?: Maybe<(
+      { __typename?: 'NewsNode' }
+      & Pick<NewsNode, 'id'>
+    )> }
+  )> }
+);
+
+export type UpdateNewsMutationVariables = Exact<{
+  id: Scalars['ID'];
+  createdAt: Scalars['Int'];
+}>;
+
+
+export type UpdateNewsMutation = (
+  { __typename?: 'Mutation' }
+  & { updateNews?: Maybe<(
+    { __typename?: 'UpdateNewsMutationPayload' }
     & { news?: Maybe<(
       { __typename?: 'NewsNode' }
       & Pick<NewsNode, 'id'>
@@ -525,9 +562,9 @@ export type SearchNewsQuery = (
 
 
 export const CreateNewsDocument = gql`
-    mutation CreateNews($url: String!, $contributorName: String, $selectCategoryId: ID, $tagIds: [ID]) {
+    mutation CreateNews($url: String!, $createdAt: Int!, $contributorName: String, $selectCategoryId: ID, $tagIds: [ID]) {
   createNews(
-    input: {url: $url, contributorName: $contributorName, selectCategoryId: $selectCategoryId, tagIds: $tagIds}
+    input: {url: $url, createdAt: $createdAt, contributorName: $contributorName, selectCategoryId: $selectCategoryId, tagIds: $tagIds}
   ) {
     news {
       id
@@ -551,6 +588,7 @@ export type CreateNewsMutationFn = Apollo.MutationFunction<CreateNewsMutation, C
  * const [createNewsMutation, { data, loading, error }] = useCreateNewsMutation({
  *   variables: {
  *      url: // value for 'url'
+ *      createdAt: // value for 'createdAt'
  *      contributorName: // value for 'contributorName'
  *      selectCategoryId: // value for 'selectCategoryId'
  *      tagIds: // value for 'tagIds'
@@ -564,6 +602,42 @@ export function useCreateNewsMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateNewsMutationHookResult = ReturnType<typeof useCreateNewsMutation>;
 export type CreateNewsMutationResult = Apollo.MutationResult<CreateNewsMutation>;
 export type CreateNewsMutationOptions = Apollo.BaseMutationOptions<CreateNewsMutation, CreateNewsMutationVariables>;
+export const UpdateNewsDocument = gql`
+    mutation UpdateNews($id: ID!, $createdAt: Int!) {
+  updateNews(input: {id: $id, createdAt: $createdAt}) {
+    news {
+      id
+    }
+  }
+}
+    `;
+export type UpdateNewsMutationFn = Apollo.MutationFunction<UpdateNewsMutation, UpdateNewsMutationVariables>;
+
+/**
+ * __useUpdateNewsMutation__
+ *
+ * To run a mutation, you first call `useUpdateNewsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateNewsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateNewsMutation, { data, loading, error }] = useUpdateNewsMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      createdAt: // value for 'createdAt'
+ *   },
+ * });
+ */
+export function useUpdateNewsMutation(baseOptions?: Apollo.MutationHookOptions<UpdateNewsMutation, UpdateNewsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateNewsMutation, UpdateNewsMutationVariables>(UpdateNewsDocument, options);
+      }
+export type UpdateNewsMutationHookResult = ReturnType<typeof useUpdateNewsMutation>;
+export type UpdateNewsMutationResult = Apollo.MutationResult<UpdateNewsMutation>;
+export type UpdateNewsMutationOptions = Apollo.BaseMutationOptions<UpdateNewsMutation, UpdateNewsMutationVariables>;
 export const GetAllDateDocument = gql`
     query GetAllDate {
   allNews {

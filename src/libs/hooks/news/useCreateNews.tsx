@@ -30,9 +30,12 @@ export const useCreateNews = () => {
       }
       try {
         setIsCreating(true);
+        // ニュースの作成日時をUNIXタイムスタンプ形式で送信
+        const now = new Date().getTime();
         await createNewsMutation({
           variables: {
             url: newsUrl,
+            createdAt: Math.floor(now / 1000),
             contributorName: contributorName,
           },
         });

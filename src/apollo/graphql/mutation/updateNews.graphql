@@ -1,0 +1,7 @@
+mutation UpdateNews($id: ID!, $createdAt: Int!) {
+  updateNews(input: { id: $id, createdAt: $createdAt }) {
+    news {
+      id
+    }
+  }
+}

@@ -30,18 +30,21 @@ const ArchivePage: NextPage<Props<GetAllDateQuery>> = (props) => {
     ? props.allDate.allNews.edges.map((news) => {
         return getDay(news?.node?.createdAt);
       })
-    : "";
+    : [];
+
+  // 日付順にソート
+  const sortedAllDays = allDays.sort();
 
   // 日付ごとの件数を取得
   // TODO: any型の修正
   const dayCount: any = {};
-  for (let i = 0; i < allDays.length; i++) {
-    const day = allDays[i];
+  for (let i = 0; i < sortedAllDays.length; i++) {
+    const day = sortedAllDays[i];
     dayCount[day] = (dayCount[day] || 0) + 1;
   }
 
   // 重複する値を削除
-  const validateDays = Array.from(new Set(allDays));
+  const validateDays = Array.from(new Set(sortedAllDays));
 
   const dayOfTheWeek = ["日", "月", "火", "水", "木", "金", "土"];
   return (

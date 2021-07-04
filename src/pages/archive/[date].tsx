@@ -30,7 +30,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return { params: { date: day } };
   });
 
-  return { paths: paths, fallback: false };
+  return { paths: paths, fallback: "blocking" };
 };
 
 // 日付ごとのデータを取得

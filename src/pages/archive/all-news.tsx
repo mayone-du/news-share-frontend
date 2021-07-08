@@ -5,6 +5,7 @@ import { GetAllNewsDocument } from "src/apollo/schema";
 import { Headline2 } from "src/components/Headline2";
 import { Layout } from "src/components/layouts/Layout";
 import { NewsList } from "src/components/news/NewsList";
+import { changeDateFormat } from "src/libs/changeDateFormat";
 
 export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo(null);
@@ -26,12 +27,21 @@ type Props<T> = {
   allNewsData: T;
 };
 const ArchiveAllNewsPage: NextPage<Props<GetAllNewsQuery>> = (props) => {
+  const newsCopy = props.allNewsData.allNews && [...props.allNewsData.allNews?.edges];
+  const news = newsCopy?.sort((a, b) => {
+    if (changeDateFormat(a?.node?.createdAt) < changeDateFormat(b?.node?.createdAt)) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+
   return (
     <Layout metaTitle="アーカイブ | Qin 夜活ニュースシェア" currentPagePath="/archive">
       <div>
         <Headline2 text="アーカイブ" />
 
-        <NewsList data={props.allNewsData.allNews} />
+        <NewsList data={{ edges: news }} />
       </div>
     </Layout>
   );

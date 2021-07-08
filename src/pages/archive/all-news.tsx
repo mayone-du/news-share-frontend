@@ -5,7 +5,7 @@ import { GetAllNewsDocument } from "src/apollo/schema";
 import { Headline2 } from "src/components/Headline2";
 import { Layout } from "src/components/layouts/Layout";
 import { NewsList } from "src/components/news/NewsList";
-import { changeDateFormat } from "src/libs/changeDateFormat";
+import { getDay } from "src/libs/getDay";
 
 export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo(null);
@@ -29,7 +29,7 @@ type Props<T> = {
 const ArchiveAllNewsPage: NextPage<Props<GetAllNewsQuery>> = (props) => {
   const newsCopy = props.allNewsData.allNews && [...props.allNewsData.allNews?.edges];
   const news = newsCopy?.sort((a, b) => {
-    if (changeDateFormat(a?.node?.createdAt) < changeDateFormat(b?.node?.createdAt)) {
+    if (getDay(a?.node?.createdAt) < getDay(b?.node?.createdAt)) {
       return -1;
     } else {
       return 1;

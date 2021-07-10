@@ -30,9 +30,9 @@ const ArchiveAllNewsPage: NextPage<Props<GetAllNewsQuery>> = (props) => {
   const newsCopy = props.allNewsData.allNews && [...props.allNewsData.allNews?.edges];
   const news = newsCopy?.sort((a, b) => {
     if (getDay(a?.node?.createdAt) < getDay(b?.node?.createdAt)) {
-      return -1;
-    } else {
       return 1;
+    } else {
+      return -1;
     }
   });
 

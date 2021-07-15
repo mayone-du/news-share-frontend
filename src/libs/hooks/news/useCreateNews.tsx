@@ -45,8 +45,11 @@ export const useCreateNews = () => {
         setNewsUrl("");
       } catch (error) {
         setIsCreating(false);
+        if (error.message === "UNIQUE constraint failed: api_news.url") {
+          toast.error("既に登録されたニュースです。");
+          return;
+        }
         toast.error("何らかのエラーが発生しました。");
-        console.error(error);
         return;
       }
     },

@@ -52,6 +52,8 @@ export const useCreateNews = () => {
           return;
         }
         toast.error("何らかのエラーが発生しました。");
+        // eslint-disable-next-line no-console
+        console.log(error.message);
         console.error(error);
         return;
       }

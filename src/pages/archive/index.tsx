@@ -32,8 +32,10 @@ const ArchivePage: NextPage<Props<GetAllDateQuery>> = (props) => {
       })
     : [];
 
-  // 日付順にソート
-  const sortedAllDays = allDays.sort();
+  // 日付順に降順でソート
+  const sortedAllDays = allDays.sort((a, b) => {
+    return parseFloat(b) - parseFloat(a);
+  });
 
   // 日付ごとの件数を取得
   // TODO: any型の修正

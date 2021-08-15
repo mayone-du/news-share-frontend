@@ -27,6 +27,8 @@ type Props<T> = {
   allNewsData: T;
 };
 const ArchiveAllNewsPage: NextPage<Props<GetAllNewsQuery>> = (props) => {
+  // eslint-disable-next-line no-console
+  console.log("props.allNewsData", props.allNewsData);
   const newsCopy = props.allNewsData.allNews && [...props.allNewsData.allNews?.edges];
   const news = newsCopy?.sort((a, b) => {
     if (getDay(a?.node?.createdAt) < getDay(b?.node?.createdAt)) {
@@ -35,6 +37,8 @@ const ArchiveAllNewsPage: NextPage<Props<GetAllNewsQuery>> = (props) => {
       return -1;
     }
   });
+  // eslint-disable-next-line no-console
+  console.log("sortedNews", news);
 
   return (
     <Layout metaTitle="アーカイブ | Qin 夜活ニュースシェア" currentPagePath="/archive">

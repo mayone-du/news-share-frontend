@@ -52,6 +52,13 @@ const ArchivePage: NextPage<Props<GetAllDateQuery>> = (props) => {
   // 重複する値を削除
   const validateDays = Array.from(new Set(sortedAllDays));
 
+  // eslint-disable-next-line no-console
+  console.log("allDays", allDays);
+  // eslint-disable-next-line no-console
+  console.log("sortedAllDays", sortedAllDays);
+  // eslint-disable-next-line no-console
+  console.log("dayCount", dayCount);
+
   const dayOfTheWeek = ["日", "月", "火", "水", "木", "金", "土"];
   return (
     <Layout metaTitle="アーカイブ | Qin 夜活ニュースシェア" currentPagePath="/archive">

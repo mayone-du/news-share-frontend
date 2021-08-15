@@ -48,6 +48,8 @@ const ArchivePage: NextPage<Props<GetAllDateQuery>> = (props) => {
   const validateDays = Array.from(new Set(sortedAllDays));
 
   // eslint-disable-next-line no-console
+  console.log("props.allDate", props.allDate);
+  // eslint-disable-next-line no-console
   console.log("allDays", allDays);
   // eslint-disable-next-line no-console
   console.log("sortedAllDays", sortedAllDays);

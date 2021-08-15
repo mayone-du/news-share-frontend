@@ -7,7 +7,7 @@ import { Headline2 } from "src/components/Headline2";
 import { Layout } from "src/components/layouts/Layout";
 import { getDay } from "src/libs/getDay";
 
-// すべての日付を取得
+// すべてのニュースから全ての日付を取得
 export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo(null);
   const { data: allDate } = await apolloClient.query<GetAllDateQuery, GetAllDateQueryVariables>({
@@ -28,18 +28,13 @@ type Props<T> = {
 const ArchivePage: NextPage<Props<GetAllDateQuery>> = (props) => {
   const allDays = props.allDate.allNews
     ? props.allDate.allNews.edges.map((news) => {
+        // 日付をフォーマット
         return getDay(news?.node?.createdAt);
       })
     : [];
 
   // 日付順にソート
-  const sortedAllDays = allDays
-    .sort
-    // (a, b) => {
-    // return parseFloat(b) - parseFloat(a);
-    // }
-    ()
-    .reverse();
+  const sortedAllDays = allDays.sort().reverse();
 
   // 日付ごとの件数を取得
   // TODO: any型の修正
@@ -58,6 +53,8 @@ const ArchivePage: NextPage<Props<GetAllDateQuery>> = (props) => {
   console.log("sortedAllDays", sortedAllDays);
   // eslint-disable-next-line no-console
   console.log("dayCount", dayCount);
+  // eslint-disable-next-line no-console
+  console.log("validateDays", validateDays);
 
   const dayOfTheWeek = ["日", "月", "火", "水", "木", "金", "土"];
   return (

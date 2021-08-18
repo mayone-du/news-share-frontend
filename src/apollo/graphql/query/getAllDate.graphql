@@ -1,5 +1,5 @@
 query GetAllDate {
-  allNews(offset: 100) {
+  allNews {
     edges {
       node {
         id

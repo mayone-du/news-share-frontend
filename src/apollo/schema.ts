@@ -640,7 +640,7 @@ export type UpdateNewsMutationResult = Apollo.MutationResult<UpdateNewsMutation>
 export type UpdateNewsMutationOptions = Apollo.BaseMutationOptions<UpdateNewsMutation, UpdateNewsMutationVariables>;
 export const GetAllDateDocument = gql`
     query GetAllDate {
-  allNews(offset: 100) {
+  allNews {
     edges {
       node {
         id

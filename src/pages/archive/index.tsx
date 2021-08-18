@@ -8,6 +8,7 @@ import { Layout } from "src/components/layouts/Layout";
 import { getDay } from "src/libs/getDay";
 
 // すべてのニュースから全ての日付を取得
+// TODO: 一度のクエリで100件までしか取得できないため、なにか良い方法を考える
 export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo(null);
   const { data: allDate } = await apolloClient.query<GetAllDateQuery, GetAllDateQueryVariables>({

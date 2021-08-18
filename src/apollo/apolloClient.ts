@@ -4,7 +4,7 @@ import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
 import merge from "deepmerge";
 import isEqual from "lodash.isequal";
-import type { AppProps } from "next/dist/next-server/lib/router/router";
+// import type { AppProps } from "next/dist/next-server/lib/router/router";
 import { parseCookies } from "nookies";
 import { cache } from "src/apollo/cache";
 import { GRAPHQL_API_ENDPOINT } from "src/utils/API_ENDPOINTS";
@@ -33,7 +33,7 @@ const createApolloClient = () => {
     cache: cache,
   });
 };
-export const initializeApollo = (initialState: AppProps["pageProps"] = null) => {
+export const initializeApollo = (initialState: any = null) => {
   const _apolloClient = apolloClient ?? createApolloClient();
 
   // ページにApollo Clientを使用したNext.jsのデータ取得メソッドがある場合、初期状態はここでハイドレーションされます。
@@ -69,7 +69,8 @@ export const initializeApollo = (initialState: AppProps["pageProps"] = null) => 
 };
 export const addApolloState = (
   client: ApolloClient<NormalizedCacheObject>,
-  pageProps: AppProps["pageProps"],
+  // pageProps: AppProps["pageProps"],
+  pageProps: any,
 ) => {
   if (pageProps?.props) {
     pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract();

@@ -1,6 +1,6 @@
 import { useReactiveVar } from "@apollo/client";
 import type { NextPage } from "next";
-import party from "party-js";
+// import party from "party-js";
 import { useCallback } from "react";
 import toast from "react-hot-toast";
 import { slackPasswordVar } from "src/apollo/cache";
@@ -73,7 +73,7 @@ const Index: NextPage = () => {
 
       handleSubmitSlack(payload);
       slackPasswordVar("");
-      party.sparkles(e.target);
+      // party.sparkles(e.target);
     },
     [data?.todayNews, handleSubmitSlack, slackPassword],
   );

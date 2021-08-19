@@ -1,4 +1,4 @@
-import party from "party-js";
+// import party from "party-js";
 import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useCreateNewsMutation } from "src/apollo/schema";
@@ -40,7 +40,7 @@ export const useCreateNews = () => {
           },
         });
         setIsCreating(false);
-        party.confetti(e.target);
+        // party.confetti(e.target);
         toast.success("シェアされました！");
         setNewsUrl("");
       } catch (error) {
@@ -55,8 +55,6 @@ export const useCreateNews = () => {
           toast.error("既に登録されたURLです。");
           return;
         }
-        // eslint-disable-next-line
-        console.log(error.message);
 
         toast.error("何らかのエラーが発生しました。");
         console.error(error);

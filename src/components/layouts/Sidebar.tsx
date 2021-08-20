@@ -37,11 +37,11 @@ export const Sidebar: React.VFC<Props> = (props) => {
               </a>
             </Link>
           </li>
-          {/* <li>
-            <Link href="/archive">
+          <li>
+            <Link href="/archives">
               <a
                 className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
-                  props.currentPagePath === "/archive" ? "bg-blue-200 dark:bg-blue-700" : null
+                  props.currentPagePath === "/archives" ? "bg-blue-200 dark:bg-blue-700" : null
                 }`}
               >
                 <div className="flex items-center">
@@ -65,7 +65,7 @@ export const Sidebar: React.VFC<Props> = (props) => {
                 </div>
               </a>
             </Link>
-          </li> */}
+          </li>
           {/* <li>
             <Link href="/category">
               <a

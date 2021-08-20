@@ -1,0 +1,15 @@
+query GetYesterdayNews {
+  yesterdayNews {
+    edges {
+      node {
+        id
+        url
+        title
+        summary
+        createdAt
+        imagePath
+        contributorName
+      }
+    }
+  }
+}

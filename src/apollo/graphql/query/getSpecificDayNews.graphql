@@ -1,0 +1,15 @@
+query GetSpecificDayNews($year: Int!, $month: Int!, $day: Int!) {
+  specificDayNews(year: $year, month: $month, day: $day) {
+    edges {
+      node {
+        id
+        url
+        title
+        summary
+        imagePath
+        createdAt
+        contributorName
+      }
+    }
+  }
+}

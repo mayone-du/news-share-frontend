@@ -254,6 +254,8 @@ export type Query = {
   news?: Maybe<NewsNode>;
   allNews?: Maybe<NewsNodeConnection>;
   todayNews?: Maybe<NewsNodeConnection>;
+  yesterdayNews?: Maybe<NewsNodeConnection>;
+  specificDayNews?: Maybe<NewsNodeConnection>;
 };
 
 
@@ -328,6 +330,41 @@ export type QueryAllNewsArgs = {
 
 
 export type QueryTodayNewsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  url?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  title_Icontains?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  summary_Icontains?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  createdAt_Icontains?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type QueryYesterdayNewsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  url?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  title_Icontains?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  summary_Icontains?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  createdAt_Icontains?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type QuerySpecificDayNewsArgs = {
+  year: Scalars['Int'];
+  month: Scalars['Int'];
+  day: Scalars['Int'];
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -524,12 +561,50 @@ export type GetAllNewsQuery = (
   )> }
 );
 
+export type GetSpecificDayNewsQueryVariables = Exact<{
+  year: Scalars['Int'];
+  month: Scalars['Int'];
+  day: Scalars['Int'];
+}>;
+
+
+export type GetSpecificDayNewsQuery = (
+  { __typename?: 'Query' }
+  & { specificDayNews?: Maybe<(
+    { __typename?: 'NewsNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'NewsNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'NewsNode' }
+        & Pick<NewsNode, 'id' | 'url' | 'title' | 'summary' | 'imagePath' | 'createdAt' | 'contributorName'>
+      )> }
+    )>> }
+  )> }
+);
+
 export type GetTodayNewsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetTodayNewsQuery = (
   { __typename?: 'Query' }
   & { todayNews?: Maybe<(
+    { __typename?: 'NewsNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'NewsNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'NewsNode' }
+        & Pick<NewsNode, 'id' | 'url' | 'title' | 'summary' | 'createdAt' | 'imagePath' | 'contributorName'>
+      )> }
+    )>> }
+  )> }
+);
+
+export type GetYesterdayNewsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetYesterdayNewsQuery = (
+  { __typename?: 'Query' }
+  & { yesterdayNews?: Maybe<(
     { __typename?: 'NewsNodeConnection' }
     & { edges: Array<Maybe<(
       { __typename?: 'NewsNodeEdge' }
@@ -733,6 +808,53 @@ export function useGetAllNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetAllNewsQueryHookResult = ReturnType<typeof useGetAllNewsQuery>;
 export type GetAllNewsLazyQueryHookResult = ReturnType<typeof useGetAllNewsLazyQuery>;
 export type GetAllNewsQueryResult = Apollo.QueryResult<GetAllNewsQuery, GetAllNewsQueryVariables>;
+export const GetSpecificDayNewsDocument = gql`
+    query GetSpecificDayNews($year: Int!, $month: Int!, $day: Int!) {
+  specificDayNews(year: $year, month: $month, day: $day) {
+    edges {
+      node {
+        id
+        url
+        title
+        summary
+        imagePath
+        createdAt
+        contributorName
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetSpecificDayNewsQuery__
+ *
+ * To run a query within a React component, call `useGetSpecificDayNewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSpecificDayNewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSpecificDayNewsQuery({
+ *   variables: {
+ *      year: // value for 'year'
+ *      month: // value for 'month'
+ *      day: // value for 'day'
+ *   },
+ * });
+ */
+export function useGetSpecificDayNewsQuery(baseOptions: Apollo.QueryHookOptions<GetSpecificDayNewsQuery, GetSpecificDayNewsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSpecificDayNewsQuery, GetSpecificDayNewsQueryVariables>(GetSpecificDayNewsDocument, options);
+      }
+export function useGetSpecificDayNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSpecificDayNewsQuery, GetSpecificDayNewsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSpecificDayNewsQuery, GetSpecificDayNewsQueryVariables>(GetSpecificDayNewsDocument, options);
+        }
+export type GetSpecificDayNewsQueryHookResult = ReturnType<typeof useGetSpecificDayNewsQuery>;
+export type GetSpecificDayNewsLazyQueryHookResult = ReturnType<typeof useGetSpecificDayNewsLazyQuery>;
+export type GetSpecificDayNewsQueryResult = Apollo.QueryResult<GetSpecificDayNewsQuery, GetSpecificDayNewsQueryVariables>;
 export const GetTodayNewsDocument = gql`
     query GetTodayNews {
   todayNews {
@@ -777,6 +899,50 @@ export function useGetTodayNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetTodayNewsQueryHookResult = ReturnType<typeof useGetTodayNewsQuery>;
 export type GetTodayNewsLazyQueryHookResult = ReturnType<typeof useGetTodayNewsLazyQuery>;
 export type GetTodayNewsQueryResult = Apollo.QueryResult<GetTodayNewsQuery, GetTodayNewsQueryVariables>;
+export const GetYesterdayNewsDocument = gql`
+    query GetYesterdayNews {
+  yesterdayNews {
+    edges {
+      node {
+        id
+        url
+        title
+        summary
+        createdAt
+        imagePath
+        contributorName
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetYesterdayNewsQuery__
+ *
+ * To run a query within a React component, call `useGetYesterdayNewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetYesterdayNewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetYesterdayNewsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetYesterdayNewsQuery(baseOptions?: Apollo.QueryHookOptions<GetYesterdayNewsQuery, GetYesterdayNewsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetYesterdayNewsQuery, GetYesterdayNewsQueryVariables>(GetYesterdayNewsDocument, options);
+      }
+export function useGetYesterdayNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetYesterdayNewsQuery, GetYesterdayNewsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetYesterdayNewsQuery, GetYesterdayNewsQueryVariables>(GetYesterdayNewsDocument, options);
+        }
+export type GetYesterdayNewsQueryHookResult = ReturnType<typeof useGetYesterdayNewsQuery>;
+export type GetYesterdayNewsLazyQueryHookResult = ReturnType<typeof useGetYesterdayNewsLazyQuery>;
+export type GetYesterdayNewsQueryResult = Apollo.QueryResult<GetYesterdayNewsQuery, GetYesterdayNewsQueryVariables>;
 export const SearchNewsDocument = gql`
     query SearchNews($searchTitleKeyword: String) {
   allNews(title_Icontains: $searchTitleKeyword) {

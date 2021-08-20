@@ -37,7 +37,7 @@ export const Sidebar: React.VFC<Props> = (props) => {
               </a>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/archive">
               <a
                 className={`block py-3 text-center hover:bg-gray-100 dark:hover:bg-gray-700 border-b transition ${
@@ -65,7 +65,7 @@ export const Sidebar: React.VFC<Props> = (props) => {
                 </div>
               </a>
             </Link>
-          </li>
+          </li> */}
           {/* <li>
             <Link href="/category">
               <a

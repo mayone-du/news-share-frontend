@@ -19,7 +19,7 @@ const ResultsPage: NextPage = () => {
       currentPagePath="/results"
     >
       <div>
-        <Headline2 text={`"${searchKeyword}"を含む検索結果`} />
+        <Headline2 text={`"${searchKeyword}"を含む検索結果 ${data?.allNews?.edges.length}件`} />
         {isLoading && <NewsLoading />}
         {data && <NewsList data={data?.allNews} />}
       </div>

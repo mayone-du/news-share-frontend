@@ -33,27 +33,23 @@ type Props = {
 const ArchivesPage: NextPage<Props> = (props) => {
   return (
     <Layout metaTitle="アーカイブ | Qin 夜活ニュースシェア" currentPagePath="/archives">
-      <div>
-        <Headline2 text="アーカイブ" />
-
-        <div className="md:flex w-full">
-          {/* 左半分 */}
-          <div className="md:w-1/2">
-            <Headline2 text="日付を選択" />
-            <ArchivesForm />
-          </div>
-          {/* 右半分 */}
-          {props.data.yesterdayNews?.edges.length === 0 ? (
-            <div className="md:w-1/2">昨日のニュースはありません。</div>
-          ) : (
-            <div className="md:w-1/2">
-              <Headline2
-                text={`昨日のニュース ${props.data.yesterdayNews?.edges.length.toString()}件`}
-              />
-              <NewsList data={props.data.yesterdayNews} />
-            </div>
-          )}
+      <div className="md:flex w-full">
+        {/* 左半分 */}
+        <div className="md:w-1/2 border-r">
+          <Headline2 text="日付を選択" />
+          <ArchivesForm />
         </div>
+        {/* 右半分 */}
+        {props.data.yesterdayNews?.edges.length === 0 ? (
+          <div className="md:w-1/2">昨日のニュースはありません。</div>
+        ) : (
+          <div className="md:w-1/2">
+            <Headline2
+              text={`昨日のニュース ${props.data.yesterdayNews?.edges.length.toString()}件`}
+            />
+            <NewsList data={props.data.yesterdayNews} />
+          </div>
+        )}
       </div>
     </Layout>
   );

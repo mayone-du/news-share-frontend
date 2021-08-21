@@ -1,5 +1,6 @@
 import { useRouter } from "next/dist/client/router";
 import { useCallback, useState } from "react";
+import toast from "react-hot-toast";
 
 export const useSelectDate = () => {
   const router = useRouter();
@@ -14,6 +15,11 @@ export const useSelectDate = () => {
   const handleSearchDate = useCallback(
     (event: React.ChangeEvent<HTMLFormElement>) => {
       event.preventDefault();
+      // 日付が選択されていなかったらエラー
+      if (date === "") {
+        toast.error("日付を選択してください。");
+        return;
+      }
       router.push({ pathname: "/archives/date", query: { date: date } });
     },
     [router, date],

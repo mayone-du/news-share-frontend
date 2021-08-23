@@ -40,16 +40,19 @@ const ArchivesPage: NextPage<Props> = (props) => {
           <ArchivesForm />
         </div>
         {/* 右半分 */}
-        {props.data.yesterdayNews?.edges.length === 0 ? (
-          <div className="md:w-1/2">昨日のニュースはありません。</div>
-        ) : (
-          <div className="md:w-1/2">
-            <Headline2
-              text={`昨日のニュース ${props.data.yesterdayNews?.edges.length.toString()}件`}
-            />
+        <div className="md:w-1/2">
+          <Headline2
+            text={
+              props.data.yesterdayNews?.edges.length === 0
+                ? `昨日のニュースはありませんでした。`
+                : `昨日のニュース ${props.data.yesterdayNews?.edges.length.toString()}件`
+            }
+          />
+          {/* ニュースが0じゃなければ表示 */}
+          {props.data.yesterdayNews?.edges.length !== 0 && (
             <NewsList data={props.data.yesterdayNews} />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </Layout>
   );

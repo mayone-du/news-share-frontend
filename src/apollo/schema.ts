@@ -256,6 +256,7 @@ export type Query = {
   todayNews?: Maybe<NewsNodeConnection>;
   yesterdayNews?: Maybe<NewsNodeConnection>;
   specificDayNews?: Maybe<NewsNodeConnection>;
+  newsCount?: Maybe<Scalars['Int']>;
 };
 
 
@@ -618,6 +619,8 @@ export type GetYesterdayNewsQuery = (
 
 export type SearchNewsQueryVariables = Exact<{
   searchTitleKeyword?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -944,8 +947,8 @@ export type GetYesterdayNewsQueryHookResult = ReturnType<typeof useGetYesterdayN
 export type GetYesterdayNewsLazyQueryHookResult = ReturnType<typeof useGetYesterdayNewsLazyQuery>;
 export type GetYesterdayNewsQueryResult = Apollo.QueryResult<GetYesterdayNewsQuery, GetYesterdayNewsQueryVariables>;
 export const SearchNewsDocument = gql`
-    query SearchNews($searchTitleKeyword: String) {
-  allNews(title_Icontains: $searchTitleKeyword) {
+    query SearchNews($searchTitleKeyword: String, $first: Int, $offset: Int) {
+  allNews(title_Icontains: $searchTitleKeyword, first: $first, offset: $offset) {
     edges {
       node {
         id
@@ -974,6 +977,8 @@ export const SearchNewsDocument = gql`
  * const { data, loading, error } = useSearchNewsQuery({
  *   variables: {
  *      searchTitleKeyword: // value for 'searchTitleKeyword'
+ *      first: // value for 'first'
+ *      offset: // value for 'offset'
  *   },
  * });
  */

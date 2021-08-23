@@ -1,5 +1,5 @@
-query SearchNews($searchTitleKeyword: String) {
-  allNews(title_Icontains: $searchTitleKeyword) {
+query SearchNews($searchTitleKeyword: String, $first: Int, $offset: Int) {
+  allNews(title_Icontains: $searchTitleKeyword, first: $first, offset: $offset) {
     edges {
       node {
         id

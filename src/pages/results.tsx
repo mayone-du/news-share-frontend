@@ -9,7 +9,12 @@ import { NewsLoading } from "src/components/news/NewsLoading";
 const ResultsPage: NextPage = () => {
   const router = useRouter();
   const searchKeyword = router.query.keyword as string;
-  const { data, loading: isLoading } = useSearchNewsQuery({
+  // const pageNumber = parseFloat(router.query.page as string);
+  const {
+    data,
+    loading: isLoading,
+    error,
+  } = useSearchNewsQuery({
     variables: { searchTitleKeyword: searchKeyword },
   });
 
@@ -18,6 +23,12 @@ const ResultsPage: NextPage = () => {
       metaTitle={`${searchKeyword}の検索結果 | Qin 夜活ニュースシェア`}
       currentPagePath="/results"
     >
+      {error && (
+        <div>
+          エラーが発生しました。時間を開けてからもう一度お試しください。
+          {console.error(error)}
+        </div>
+      )}
       <div>
         <Headline2 text={`"${searchKeyword}"を含む検索結果 ${data?.allNews?.edges.length}件`} />
         {isLoading && <NewsLoading />}

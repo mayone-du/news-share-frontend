@@ -46,12 +46,12 @@ export const useCreateNews = () => {
       } catch (error) {
         setIsCreating(false);
         // 本番環境とローカルでエラー文が異なる
-        // if (error.message === "UNIQUE constraint failed: api_news.url") {
-        if (
-          error.message.includes(
-            'duplicate key value violates unique constraint "api_news_url_key"',
-          )
-        ) {
+        if (error.message === "UNIQUE constraint failed: api_news.url") {
+          // if (
+          //   error.message.includes(
+          //     'duplicate key value violates unique constraint "api_news_url_key"',
+          //   )
+          // ) {
           toast.error("既に登録されたURLです。");
           return;
         }

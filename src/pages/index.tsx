@@ -104,7 +104,11 @@ const Index: NextPage = () => {
         </div>
         <div className="md:w-1/2 md:border-l">
           <div>
-            <Headline2 text={`今日のニュース ${data?.todayNews?.edges.length.toString()}件`} />
+            <Headline2
+              text={`今日のニュース ${
+                data?.todayNews?.edges.length && data.todayNews.edges.length.toString()
+              }件`}
+            />
             {data?.todayNews && <NewsList data={data?.todayNews} />}
             {isLoading && <NewsLoading />}
           </div>

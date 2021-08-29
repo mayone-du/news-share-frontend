@@ -32,13 +32,18 @@ export const useCreateNews = () => {
         setIsCreating(true);
         // ニュースの作成日時をUNIXタイムスタンプ形式で送信
         const now = new Date().getTime();
-        await createNewsMutation({
+        const { errors } = await createNewsMutation({
           variables: {
             url: newsUrl,
             createdAt: Math.floor(now / 1000),
             contributorName: contributorName,
           },
         });
+        if (errors) {
+          toast.error("既に登録されたURLです。");
+          console.error("CreateNews Error:", errors);
+          return;
+        }
         setIsCreating(false);
         // party.confetti(e.target);
         toast.success("シェアされました！");
@@ -46,12 +51,12 @@ export const useCreateNews = () => {
       } catch (error) {
         setIsCreating(false);
         // 本番環境とローカルでエラー文が異なる
-        if (error.message === "UNIQUE constraint failed: api_news.url") {
-          // if (
-          //   error.message.includes(
-          //     'duplicate key value violates unique constraint "api_news_url_key"',
-          //   )
-          // ) {
+        // if (error.message === "UNIQUE constraint failed: api_news.url") {
+        if (
+          error?.message?.includes(
+            'duplicate key value violates unique constraint "api_news_url_key"',
+          )
+        ) {
           toast.error("既に登録されたURLです。");
           return;
         }

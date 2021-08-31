@@ -48,10 +48,11 @@ export const useCreateNews = () => {
         // party.confetti(e.target);
         toast.success("シェアされました！");
         setNewsUrl("");
-      } catch (error) {
+      } catch (error: any) {
         setIsCreating(false);
         // 本番環境とローカルでエラー文が異なる
         // if (error.message === "UNIQUE constraint failed: api_news.url") {
+
         if (
           error?.message?.includes(
             'duplicate key value violates unique constraint "api_news_url_key"',
